@@ -124,6 +124,19 @@ body.len .l-cn{display:none!important}
 .combo-toggle:hover{background:rgba(201,168,76,.08);border-color:var(--gold)}
 .combo-toggle[aria-expanded="true"]{border-radius:8px 8px 0 0;border-bottom-color:transparent}
 .combo-wrap{border:1px solid var(--border);border-top:none;border-radius:0 0 8px 8px;overflow-x:auto}
+
+/* COMBO 81 DROPDOWN */
+.combo-detail{margin-top:.35rem;display:none}
+.combo-detail.open{display:block;animation:fadeUp .25s ease}
+.combo-sel-row{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-top:.35rem}
+.combo-sel-lbl{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.15em;color:var(--muted)}
+.combo-sel{background:var(--card2);border:1px solid var(--border);color:var(--gold);font-family:'Cinzel',serif;font-size:.78rem;padding:.3rem .6rem;border-radius:5px;cursor:pointer}
+.combo-sel:focus{outline:none;border-color:var(--gold)}
+.combo-desc-box{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:.85rem 1rem;margin-top:.6rem}
+.combo-desc-cn{font-family:'Noto Serif SC',serif;font-size:.8rem;line-height:1.9;color:var(--text);margin-bottom:.6rem}
+.combo-desc-en{font-size:.78rem;line-height:1.75;color:var(--muted);padding-top:.6rem;border-top:1px solid var(--border)}
+.combo-expand-btn{background:none;border:none;color:var(--gold);font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.1em;cursor:pointer;padding:.2rem 0;text-decoration:underline;text-underline-offset:3px}
+.combo-expand-btn:hover{opacity:.8}
 </style>
 </head>
 <body data-theme="dark">
@@ -263,6 +276,90 @@ body.len .l-cn{display:none!important}
 // ══════════════════════════════════════════
 // DATA
 // ══════════════════════════════════════════
+
+var COMBOS81 = {
+  '112': {cn:'正：自己非常自信的沟通，适合做中介。（大到可以做国家与国家的联系那就是外交官，小到可以做到个人与个人的联系就是中介） 负：自己已经厉害到能和自己沟通，那还需不需要另一半了？婚姻会有短暂或永久性的分离。有四种情况，有名无实、两地分居、生离、死别。 所以，有112的家人一定要学会借力才能改变。 独立能力强，做事却又常常半途而废；过于自信的言谈在与人交往时，容易受到小人陷害；经过较长时间磨练或多读书，会少走弯路。晚婚比较理想。 做事矛盾，纠结，容易半途而废，虎头蛇尾，说一套做一套，多读书，多突破自我。', en:'Strengths: Highly confident in communication — naturally suited to be a bridge between people, from diplomats connecting nations to intermediaries connecting individuals. Challenges: Confidence so self-sufficient that one may question whether a partner is needed at all, leading to short or long-term separations — four possible forms: a marriage in name only, living apart, separation, or loss. Those with 112 must learn to leverage the strengths of others to effect real change. Independent but prone to abandoning tasks halfway; overconfidence makes one vulnerable to manipulation. Late marriage is advisable. Contradictory in action — tends to say one thing and do another. Read more and push past personal limitations.'},
+  '123': {cn:'正：自己既会说又会表达，是个出色的演说家。 负：既有犹豫不决的行动，所以有123的人做事开头很好，但是很容易反复，结果就会出现虎头蛇尾。 有主见，有明确的目标；说话很直接并有权威感，为人坦率真诚；切忌祸从口出；如果能很好地管理和发挥在口才方面的特长，或许能成为出色的演说家，适合当演员。 说话不经过大脑，比较感性，懂得察言观色，反应快，给人感觉圆滑，在意别人说话，好心办不了好事，善变，适合讲师。', en:'Strengths: Both articulate and expressive — the makings of an outstanding speaker. Challenges: Indecision in action means good starts rarely reach the finish line; things begun with enthusiasm often peter out. Opinionated with a clear sense of direction; direct speech with natural authority; sincere and frank — but be mindful that words can cause unintended harm. If verbal talents are properly channelled, this person can become an excellent orator or performer. Speaks from emotion rather than reflection; perceptive of others\' feelings; quick-thinking and socially adept; good intentions don\'t always produce good outcomes; adaptable — well-suited as a trainer or lecturer.'},
+  '134': {cn:'正：自己既会表达又会总结，所以记忆力好。 负：自己事情做完了再去想，所以容易感到委屈而抱怨，进而多愁善感。 富有创意，有明确的目标，有点特立独行；内心相当脆弱，依赖性较强，凡事希望稳定、牢靠，却又想尝试新事物；切忌不要盲目的忙碌，要稳中求胜。 太过于感性，喜欢流眼泪。感性，冲动，喜欢尝试，又害怕，矛盾，焦躁，喜欢抱怨。', en:'Strengths: Able to both express and synthesise — results in an excellent memory. Challenges: Reflects on things only after they are done, leading to feelings of grievance and a tendency toward sentimentality and complaining. Creative and goal-oriented with an independent streak; emotionally sensitive and somewhat dependent — seeks stability while simultaneously craving new experiences. Avoid aimless busyness; seek steady progress. Overly emotional, prone to tears; impulsive, eager to try new things yet fearful — conflicted, restless, and inclined to complain.'},
+  '145': {cn:'正：自己经过分析思考后确定的目标，坚持不懈，容易实现。 负：自己想出来的方向，不易实现，容易事与愿违，越想要反而越得不到。 独立而稳重，但太过保守，缺乏主动积极的勇气，需要有别人的顾虑；不喜欢独处，有人相伴才会觉得安全；有很多计划，但行动能力较弱。 容易半途而废，缺少突破，要么是人上人，要么是人下人。需要有人鼓励，不适合单干。需要有个坚强有力的领导带一带。', en:'Strengths: Goals formed through careful analysis and reflection are pursued with persistence and are achievable. Challenges: Self-conceived directions are difficult to realise — the harder one chases, the further the goal recedes. Independent yet cautious; too conservative and lacking the courage to take initiative; prefers company to solitude for a sense of security; has many plans but struggles with execution. Prone to giving up midway — either a leader or a follower, rarely in between. Needs encouragement and is not suited to working alone. A strong guiding leader makes all the difference.'},
+  '156': {cn:'正：自己有五方财，需要走出去求财。 负：如果走不出去容易有不良嗜好，就是五个方面花钱。 事业心重，喜欢坚持原则，面对难题时不愿意求助别人；在陌生的地方更加不受束缚，容易展开新的局面；大男人、大女人主义，容易赢得别人的信任。 适合到外地发展，尤其男性，自我自大，比较固执，喜欢挑剔，容易沉迷某种嗜好。方向感强，有自主的一面，可以赚到自己的钱。', en:'Strengths: Wealth can come from five directions — one must go out and seek it. Challenges: Staying in one\'s comfort zone invites bad habits and spending across all five areas. Highly ambitious, principled, and reluctant to ask for help when challenged; thrives in unfamiliar environments where new opportunities emerge; strong-willed and commanding — earns others\' trust naturally. Best suited to developing outside one\'s hometown. Can be arrogant and stubborn, prone to finding fault, and susceptible to addictive habits. Strong sense of direction and self-reliance — earns money independently.'},
+  '167': {cn:'正：自己用智慧把人吸引过来，就会帮助你白手起家。 负：自己用钱吸引来的人，就会吃穷败光你，让你重头再来。 生来有一种近乎通灵的洞悉晓情的能力，性格坚强独立；善于解决问题，但有过于奢侈的倾向；喜欢品牌的物品。为了取悦对方，可能会不顾一切。 有财富，愿意把所有的钱花到朋友、恋人身上。花钱大手大脚。', en:'Strengths: Using wisdom to attract people will help build an empire from nothing. Challenges: Using money to attract people results in being bled dry and having to start over from scratch. Born with an almost intuitive ability to read people and situations; strong and independent; a gifted problem-solver but with an inclination toward extravagance; drawn to luxury brands. May go to great lengths to please others. Generous with wealth — willingly spends everything on friends and lovers; tends to live beyond means.'},
+  '178': {cn:'正：自己去帮助别人拿到权利。 负：自己会给别人带来压力，容易背黑锅，借出去钱收不回来。 坚强独立，有突出的领袖气质；但对马上就要实现的愿望，没有十足的信心；不管是做生意还是处理人际关系，要记得在距离上做文章。 对待朋友很有责任，仗义，人缘好，有领导气质，很会做生意，能做大。建议搭乘飞机，让自己改运，路程艰险。', en:'Strengths: Empowers others to achieve their potential. Challenges: Can inadvertently create pressure for others; risks being blamed unfairly, and money lent rarely returns. Strong and independent with outstanding leadership presence; though lacking full confidence when goals are within reach. In business and personal relationships, maintaining appropriate distance is key. Highly responsible toward friends, loyal, well-liked, and naturally commanding — capable of building something substantial. Travel, particularly by air, is said to shift one\'s fortune; the path ahead requires endurance.'},
+  '189': {cn:'正：自己承担起责任就能拿到成果。 负：自己顶着压力要结果，不轻信别人，所以事事亲力亲为，由于压力过大，容易的心脑血管病。 建议：平衡五行，减低心脑血管病发几率和程度。 完美主义者，责任心重，有时候为了做得更好压力很大；乐于助人，却也常常为此困扰不已，一方面为付出没有回报而觉得不值得，却又停不下帮助别人的脚步。 完美主义者，有责任感，有压力感。想成功，必须肯突破，出去闯，多经历事情，比较辛苦。', en:'Strengths: Taking on responsibility leads to real results. Challenges: Bearing pressure alone while demanding outcomes means doing everything yourself — this level of stress elevates the risk of cardiovascular illness. Recommendation: balance the Five Elements to reduce health risks. A perfectionist with a strong sense of responsibility — sometimes under enormous pressure in the pursuit of excellence. Eager to help others yet troubled by feeling unrecognised for the effort; finds it impossible to stop helping regardless. Driven and hardworking — success requires willingness to break through comfort zones and accumulate real-world experience.'},
+  '191': {cn:'正：自己拿到成果成就自己。 负：自己拿到结果还是剩自己，影响婚姻。 独立自主，喜欢靠个人能力来达到事业上的成果和工作中的成就；因为潜在的性格因素，和别人合作不会有很好的结果，要在自力更生方面更加努力。过于关注事业，容易忽略感情而导致分离。 成功之后依然孤独，适合个体经营，靠自己干，比较累，要学会借助朋友的力量。', en:'Strengths: Achieving results through one\'s own efforts — success belongs entirely to oneself. Challenges: Reaching the summit alone leaves one still alone, which impacts marriage and partnership. Self-reliant and independent, preferring to achieve career goals through personal ability; collaboration often yields poor results due to underlying personality tendencies — self-sufficiency must be cultivated further. Overfocus on career causes neglect of relationships, leading to separation. Even after success, loneliness remains — best suited to solo ventures. Must learn to draw on the strength of others.'},
+  '213': {cn:'正：张开嘴自信的表达，讲师号。 负：说的都是自己想表达的，叫发号施令。 年轻时有丰富的背景资源，难题在与人相处、爱情、友情都容易关系紧绷，开始时会努力表现友善，一旦发现事情的发展不如预期时，会马上显出领导性格。说话有权威，属于圆滑型的。独立，适合开发市场的工作。 很能说，善于察言观色，爱音乐，多愁善感，心地善良，给人感觉圆滑，说话直接，喜欢命令别人。', en:'Strengths: Speaking with confidence and clear expression — the lecturer\'s number. Challenges: Communication is one-directional — telling rather than listening; a tendency to command rather than collaborate. Rich background and resources in youth; interpersonal relationships, romance, and friendships tend to feel strained. Initially makes the effort to appear friendly, but once things don\'t go as expected, a dominant leadership character quickly emerges. Authoritative speech with a smooth, diplomatic quality — independent and well-suited to market development work. Highly verbal, perceptive, music-loving, sentimental, and warm-hearted — projects a polished image but can be blunt and commanding.'},
+  '224': {cn:'正：有耐心的去说策划好的事，比较沉稳。 负：说完了又说不该说的是，容易保守不住秘密。 渴望安全感，没有胆量做冒险的事；心慈面软，善解人意，但不太懂得保守秘密；适合从事服务行业，性格偏向女性化。 会说，但是不知道怎么去说，与人接触温馨，被动，适合做服务行业。', en:'Strengths: Patient, composed communication with well-thought-out plans — steady and grounded. Challenges: After saying the right things, tends to say too much — struggles to keep secrets. Craves security; not inclined toward risk-taking; empathetic and soft-hearted but not very good at keeping confidences; suited to service-oriented industries; personality tends toward the feminine. Good at talking but uncertain how to say it well — warm in interactions, passive by nature — well-suited to service roles.'},
+  '235': {cn:'正：既会说又会表达，目标方向明确。 负：张嘴冲动的表达，给自己带来阻碍。 外表温柔友善，内心感情丰富；做事讲究技巧，遇到难题可以巧妙化解；弱点是有点固执，因此影响了感情的维护；发脾气时，给人一种挑衅和攻击的感觉。 脾气不好，来得快，说话带攻击型，容易伤人，直肠子。非常固执。沟通能力强，执行力强，有原则。', en:'Strengths: Articulate and expressive with a clear sense of direction and purpose. Challenges: Impulsive, unfiltered expression creates obstacles for oneself. Gentle and friendly on the surface with a rich inner emotional life; tactful in handling difficulties and resolving problems skillfully; the weak point is a degree of stubbornness that can harm relationships; when angry, comes across as provocative and aggressive. Short-tempered — reacts quickly, speaks bluntly and with an edge that can hurt others. Very stubborn. Strong communicator, decisive in execution, and principled.'},
+  '246': {cn:'正：把策划好的事说出来，就来钱了。 负：说出来的话想的比较多，容易错失财富。 有得天独厚的魅力口才，是善于沟通和表达的强手；言谈举止中会给人一种富有智慧的感觉；从事推销业务会有不菲的收益。 靠嘴赚钱，业务能力强，适合做服务行业，做销售。', en:'Strengths: Articulate ideas that have been carefully planned naturally attract wealth. Challenges: Overthinking what is said makes one prone to missing financial opportunities. Gifted with a natural charisma and eloquence — masterful at communication and expression; conversations carry an air of wisdom; sales and business development yield strong returns. Earns through speech — powerful in business development, well-suited to service industries and sales roles.'},
+  '257': {cn:'正：说有目标的事去吸引他人。 负：说话非常固执容易伤人。 此号容易出帅哥美女。 坚守原则，不懂变通；有着莫名其妙的独特魅力，让自己成为别人关注的焦点；沟通能力强，有一种说一不二的强韧感。与人交往时容易有分别心。 原则性强，固执，个性直率，自由，随和。别人喜欢接近他。人缘不错。', en:'Strengths: Speaking with direction and purpose naturally attracts followers. Challenges: Speaks with inflexibility — blunt words that can wound others. This number often produces people of striking appearance. Principled to the point of rigidity; possesses a mysterious and unique charisma that draws others\' attention; strong communicator with an unwavering quality. Can be judgmental in relationships. Principled, candid, free-spirited, and easy-going — others are naturally drawn close. Good social standing.'},
+  '268': {cn:'正：说的都是带有智慧的话容易拿到权利。 负：谈钱有压力。 感性、敏感，喜欢为别人着想，所以人际关系也会恨好；通过在销售或服务行业的发展，可以获得较多的财富；对金融投资较多的兴趣，期望通过自己的努力去获取。 喜欢谈事业，提钱，喜欢攀比，心里比较累。性情温和。', en:'Strengths: Wisdom-infused words naturally lead to positions of influence. Challenges: Conversations around money feel burdensome — financial pressure is a recurring theme. Sensitive and empathetic — genuinely considers others, resulting in good relationships; success comes through sales or service industries; maintains a keen interest in financial investment and strives to grow wealth through effort. Enjoys discussing business and ambitions; can be competitive in comparison to others; inwardly weary at times. Gentle disposition.'},
+  '279': {cn:'正：主动跟年龄比自己小的异性去沟通就容易拿到成果。 负：不主动跟异性好好说话就不容易拿到成果。 爽朗明快，温暖亲切，很有贵人缘；朋友很多，也都愿意给你尽可能多的帮助；男性易走桃花运，要切忌不可滥情，否则会失去很多可以帮助你的女性朋友。 能够用嘴巴吸引贵人和人缘，为人随和，很多比自己小的桃花。', en:'Strengths: Proactively engaging with those younger and of the opposite sex leads naturally to positive outcomes. Challenges: Without that initiative, results remain out of reach. Bright and warm, with a wonderful ability to attract mentors and benefactors; many friends who are genuinely willing to help. Men are especially prone to romantic encounters — discretion is advised, as careless involvement can lose valuable female allies. Able to attract support and goodwill through genuine communication; easy-going in nature; many younger romantic admirers.'},
+  '281': {cn:'正：张开嘴顶住压力，成就自己。 负：说出来的压力都留给自己。 有不少投资，在销售行业会有不错的发展；责任感很强，总是匆匆忙忙；如果有没有完成的事务，会给自己造成很大的心理压力。有销售冠军的潜能。 销售高手，容易忙碌，内心容易孤独。', en:'Strengths: Speaking up and standing firm under pressure leads to personal achievement and success. Challenges: The pressure of speaking up is carried entirely by oneself. Strong investment instincts; well-suited to sales where real development is possible; deeply responsible — always in motion; any unfinished business creates significant psychological pressure. Has the potential to be a top sales performer. A natural sales talent — prone to busyness; quietly lonely within.'},
+  '292': {cn:'正：说的都是自己成功的经验告诉别人，军师号。 负：说的都是自己验证过的经历，不吃一埑不长一智，会经历很多磨难。 想法很多，行动能力却较差，适合做别人的参谋；在做生意、投资、产业方面有先天的悟性；年轻时谨小慎微，只想不做，中年后若能把握机会，便可成功在即。特别适合做中介、资源整合。 喜欢谈谈事业，投资。能说会道。光说不做，可以做军师。', en:'Strengths: Sharing wisdom born from personal experience and guiding others — the strategist\'s number. Challenges: Only trusts what has been personally verified — learns exclusively through hard experience, inviting many trials. Full of ideas but weak on execution — best as an advisor; an innate sense for business, investment, and enterprise. Cautious and contemplative in youth — more of a thinker than a doer; if opportunities are seized in middle age, success follows swiftly. Exceptionally suited to intermediary roles and resource integration. Loves discussing ventures and investments — all talk, little action; a natural advisor behind the scenes.'},
+  '314': {cn:'正：行动或者表达后自己懂得总结。 负：做完了自我的想，感觉所有人都不理解他。 工作勤奋，只注重过程，容易忽略目标；耐力不够，需要别人不断鼓励才能坚持；不管是男性还是女性，都过于感性，喜欢流眼泪。 冲动，欠考虑，缺少安全感。', en:'Strengths: After acting or expressing, naturally reflects and draws conclusions. Challenges: Introspection after the fact creates a sense that no one truly understands them. Hardworking but focused on process rather than outcome; endurance is limited — needs ongoing encouragement to persist; regardless of gender, tends to be overly emotional and prone to tears. Impulsive; insufficient reflection; lacks a sense of security.'},
+  '325': {cn:'正：主动的去沟通，更容易实现目标。 负：急于的去说，容易受到阻碍。 谈话的速度太快，常常忽略了讲话造成的后果；过于信任别人，可能被别人抓住把柄；切忌祸从口出，凡事三思而后行。 心直口快，不想后果，说话直。没后路，切忌要三思而后行。', en:'Strengths: Proactive communication makes goals significantly easier to achieve. Challenges: Rushing to speak creates unnecessary obstacles. Speaks too quickly, often overlooking the consequences of words; overly trusting of others — can be taken advantage of; impulsive speech is a recurring liability — think carefully before speaking. Direct with a tendency to blurt things out; no room for retreat — always think before you act.'},
+  '336': {cn:'正：行动再行动脚踏实地就会赢得财富。 负：冲动的去赚钱，容易走捷径，逢赌必输。 崇尚精神上的满足，极度情绪化、容易冲动、缺乏耐性；只要有行动，依赖其天赋是可以赚到钱的；切忌不要参与任何赌博或类似的活动。 容易冲动，脾气不好，不能赌博，谨慎投资。', en:'Strengths: Persistent, grounded action leads to the accumulation of wealth. Challenges: Impulsive money-making shortcut-seeking leads to losses — gambling in any form is especially damaging. Values spiritual fulfilment; extremely emotional and impatient; capable of earning money through natural talent alone — but must absolutely avoid any form of gambling or speculative activity. Impulsive, short-tempered; no gambling, and cautious investing.'},
+  '347': {cn:'正：积极的行动策划就会有人跟随。 负：冲动的去猜疑别人，容易失去人心。 具备策划能力，思维敏捷，反应迅速，能及时做出决定；有时表里不一，更因坏脾气给自己带来烦恼；过于小心翼翼，不爱冒险，会错过很多机会。习惯身体力行的管理模式。 个人魅力吸引贵人，容易心口不一，做事小心翼翼，不爱冒险，聪明但不实在。爱抱怨，朋友圈容易变动，友谊短暂。', en:'Strengths: Proactive planning and structured action naturally draws followers. Challenges: Impulsive suspicion of others damages relationships and undermines loyalty. Strong planning ability with a sharp, quick mind — capable of fast decisions; sometimes inconsistent between words and actions; a bad temper brings unnecessary trouble; overly cautious and averse to risk means many opportunities are missed. Prefers leading by personal example. Personal magnetism attracts benefactors, but inconsistency causes problems — clever yet not entirely dependable; prone to complaints and shifting social circles.'},
+  '358': {cn:'正：积极的去行动有方向目标就会拿到权力。 负：冲动的去追求目标容易给自己带来压力。 有良好的沟通个能力，能处理错综复杂的人际关系，是超强的业务代表；过于敏感，容易被激怒，但不良情绪很快会消失，情绪化。 冲动固执，脾气不好，冲劲足。', en:'Strengths: Purposeful action toward a clear goal leads to influence and authority. Challenges: Impulsive pursuit of goals creates self-generated pressure. Excellent communicator capable of navigating complex interpersonal dynamics — a standout business developer; highly sensitive and easily provoked, though negative emotions pass quickly. Impulsive and stubborn with a sharp temper — but full of drive and momentum.'},
+  '369': {cn:'正：行动起来去赚钱就能拿到成果。意思就是走着去赚钱。 负：冲动的用钱去换结果，花销比较大，大花筒。 容易相处，好恶分明，注重别人的痛苦；最大的问题来自于太聪明而想得多，喜欢沉醉在人生憧憬梦想心灵世界里，如果缺乏引导和决策，梦想就永远无法实现。对于财富有挥金如土的特质。 聪明，有行动力，烧钱买机会，用钱打理人际关系。为朋友花钱不眨眼。机会多一些。能花能赚。', en:'Strengths: Taking action to earn money yields results — wealth comes to those who move toward it. Challenges: Impulsively spending to buy results leads to significant expenditure — a big spender by nature. Easy to get along with; clear in likes and dislikes; attuned to others\' difficulties. The greatest challenge is an overactive mind — prone to dwelling in ideals and dreams; without guidance and decision-making, aspirations remain unrealised. Possesses a lavish quality toward wealth. Intelligent and action-oriented — spends freely to buy opportunities and cultivate relationships. Generous with money for friends without hesitation. Capable of both earning and spending significantly.'},
+  '371': {cn:'正：积极的跟人表达就会成就自己。 负：一发脾气就会赶走贵人剩下自己。 才华横溢，创造力丰富，是思考型的人物；疑心过重。重大事情面前犹豫不决；有可能会背叛支持者，赶走贵人，警惕在无意间决绝别人的帮助。 疑心重，脾气不好，孤独。朋友容易变动，贵人被赶走。', en:'Strengths: Active, expressive engagement with others leads to personal achievement. Challenges: Losing one\'s temper drives away benefactors and leaves one alone. Brilliantly talented with rich creativity — a reflective, thinking personality; prone to excessive suspicion. Hesitant at critical moments; risks alienating supporters without realising it, inadvertently turning away those willing to help. Deeply suspicious, short-tempered, and solitary. Social circle unstable — benefactors are pushed away.'},
+  '382': {cn:'正：积极的带着责任去沟通，就会有意想不到的收获。 负：冲动的去要权利，张嘴容易伤人，情绪来得快去得快。 建议：平衡水火冲，否则脾气太大影响身体，影响婚姻。 忙忙碌碌，却不知为谁辛苦为谁忙；极度情绪化，但脾气来得快也去得快；年少创业困难，要避开在家里或办公室的时间过长。 阻碍多，脾气善变。需要多做善事。', en:'Strengths: Active communication grounded in responsibility yields unexpected rewards. Challenges: Impulsive assertion of authority through words tends to hurt others — emotions rise and fall rapidly. Recommendation: balance the Water-Fire conflict to prevent explosive temper from damaging health and relationships. Perpetually busy yet unclear on the purpose of the effort; highly emotional with moods that arrive and depart quickly; challenges in early entrepreneurship — avoid spending excessive time at home or in the office. Many obstacles; unstable temperament. Doing more good deeds is advised.'},
+  '393': {cn:'正：行动接着拿到成果再去表达。 负：行动拿到结果还是行动，能折腾，肿瘤高发。 才华横溢，心智能力极强，要注重渠道的开掘；固执、过分的自我肯定，不喜欢求助别人；感情方面执迷不悟，喜欢钻牛角尖。拥有才艺的特质，如厨艺、跳舞、书法、手艺等。 喜欢钻牛角尖，一技之长。心灵手巧。行动力强。', en:'Strengths: Act first, achieve results, then express — a productive cycle. Challenges: Action followed by more action without reflection can lead to restlessness and, in health terms, increased risk of tumours. Brilliantly talented with exceptional mental ability; must focus on opening the right channels; stubborn and overly self-assured — dislikes asking for help; in matters of the heart, tends toward obsession. Possesses a distinctive craft or artistic talent — cooking, dance, calligraphy, or skilled handiwork.'},
+  '415': {cn:'正：想好了，自信的按照方向去做，容易拿到财富。 负：想自己的方向去做，越想到越得不到。 平易近人，好相处，希望亲密的伴侣关系，但又怕失去自由；适合充当政治人物，但不能在一个位置上呆得过久；要谨防计划被中伤者扰乱。非常聪明却又缺乏自信。 实在，平易近人，直爽，原则性强，希望完美，想得多，容易半途而废。', en:'Strengths: A well-formed plan pursued with confidence in the right direction easily attracts wealth. Challenges: Pursuing a self-conceived direction leads to the opposite — the harder one tries, the further away the goal. Approachable and easy-going; desires closeness yet fears losing freedom; well-suited to public life though should avoid staying in one position too long; must guard against plans being sabotaged by detractors. Extremely intelligent yet lacking in confidence. Practical, straightforward, and principled — seeks perfection but tends to overthink and abandon efforts midway.'},
+  '426': {cn:'正：想好了再说，就容易得到财富。 负：因为想不明白不去说不容易得到财富。 擅长处理人际关系，有牺牲精神；是非常出色的策划家金额演说家，做销售能赚到很多钱，可以选择独立创业或和表达能力有关的职业。 靠嘴吃饭，销售高手，同246 适合做服务行业，做销售。', en:'Strengths: Speaking clearly from a well-considered plan makes wealth easier to attract. Challenges: Unclear thinking leads to silence, and silence keeps wealth away. Skilled at managing relationships with a spirit of sacrifice; an outstanding planner and speaker — sales excellence is a natural path; independent entrepreneurship or verbal-skill professions yield strong returns. Earns through speaking — a natural salesperson; similar to 246 — well-suited to service industries and direct sales.'},
+  '437': {cn:'正：想好了就行动人们愿意跟随。 负：想不明白容易冲动就会失去贵人。 一个精打细算的策划者，有能力吸引很多的支持者；吸引别人做支持者时，要小心反被别人利用；迅速的规划者，能在很短的时间完成工作。 精打细算，积极行动，吸引人脉，心态好吸引贵人，心态不好，吸引小人。', en:'Strengths: Decisive, well-planned action attracts willing followers. Challenges: Acting impulsively without clarity drives benefactors away. A precise and calculated planner — able to attract many supporters; must be careful not to be exploited by those drawn in; a rapid executor who completes tasks in minimal time. Calculates carefully and acts decisively — attracts the right network; the right mindset draws benefactors, the wrong mindset draws opportunists.'},
+  '448': {cn:'正：想明白了策划好，去担当，就会拿到权利。 负：怎么想都是压力，思想行为容易受困。 喜欢有计划，有计划才有激情，但过多的计划会让你压力过重，而且没有重点；天资聪颖，想法很多，但只会纸上谈兵，行动能力较弱。 适合做教授，专家。如果创业容易给自己造成压力。', en:'Strengths: Clear thinking followed by structured planning and decisive ownership leads to real authority. Challenges: Overthinking generates pressure — thinking and actions can become trapped in cycles. Recommendation: Thrives with a plan — without one, loses passion; too many plans create excessive pressure without clear priority. Highly intelligent with abundant ideas, but prone to planning without executing. Best suited to academic or expert roles. Entrepreneurship tends to generate unnecessary self-imposed pressure.'},
+  '459': {cn:'正：想的是正确的方向就会拿到成果。 负：想得多，目标不明确，不容易拿到成果。 脚踏实地，坚持原则；做事都有目的，为达目的有时候不折手段；对草本植物有兴趣。 企业家的苗子，做事不择手段，喜欢养花，种植。', en:'Strengths: Correct planning in the right direction leads to tangible results. Challenges: Too much thinking without a clear target makes results elusive. Grounded and principled — approaches everything with purpose; goal-oriented even if methods are sometimes unconventional; has an affinity for plants and nature. Has the makings of an entrepreneur — determined in pursuit, drawn to gardening, cultivation, and nature.'},
+  '461': {cn:'正：想明白钱就应该给自己，人生就不纠结。（来帮我赚钱） 负：想不明白这钱是该留给别人还是自己，容易情财两伤，为情所困。 工作勤奋，个性稳重，自信心十足，对于如何让获得财富有着不错的愿景和规划；适合做金融策划者，能给别人带来财富，也能给自己带来不错的收入。 苛刻，挑剔，朋友受不了。孤独。适合从事财务规划，策划。', en:'Strengths: Understanding that money should serve oneself removes internal conflict and brings clarity. Challenges: Indecision about whether money is for oneself or others leads to losses in both finances and relationships. Hardworking, composed, and self-assured — holds a clear vision for wealth creation and planning; well-suited as a financial strategist, creating prosperity for others and generating respectable income personally. Exacting and critical — others can find this hard to tolerate. Solitary by nature. Well-suited to financial planning, strategy, and advisory roles.'},
+  '472': {cn:'正：想好了人就来帮你去沟通，就能拿到成果。 负：老想着别人来帮你说，缺少行动，只说不做。（依赖） 不喜欢冒险，分析能力强，善于解决当下的问题；喜欢计划未来，也乐于给别人出谋划策；要珍惜有丰富经验的人给你提供帮助，抓住机会。 精明的太过，能力很强。多疑，犹豫。不喜欢冒险。', en:'Strengths: A clear plan attracts others who will communicate on your behalf — results follow naturally. Challenges: Waiting for others to act while taking no initiative means only talking, never doing — a pattern of dependency. Cautious and risk-averse; strong analytical ability; good at solving immediate problems; enjoys planning for the future and offering counsel to others; must cherish the wisdom offered by experienced people and seize the opportunities presented. Sharp to the point of overthinking — highly capable but prone to suspicion and hesitation. Risk-averse.'},
+  '483': {cn:'正：想好了去承担，积极地去行动。 负：想的总是压力很容易冲动，钻牛角尖，在漩涡中徘徊。 乐于策划，却经常漫无目的，压力过大，计划总是流产；每天做重复的事情，没有梦想，过着模糊的生活；婚姻会有波折，如果能经常整理自己的思路，会有改观。执行者的首选。 若是老板的话，策划的过多，糊涂，白忙一场。若是员工的话，专业策划人士，适合企业职工，公务员，教师。女性容易二婚。', en:'Strengths: Think it through, take responsibility, and act with energy. Challenges: Pressure leads to impulsive reactions, obsessive thinking, and becoming stuck in mental cycles. Enjoys planning but often lacks direction — excessive pressure causes plans to collapse; days fill with repetitive tasks devoid of vision; marriage may face turbulence; regular mental decluttering brings real improvement. The ideal executor. As a leader: too much scattered planning leads to confusion and wasted effort. As an employee: an excellent professional — suited to corporate roles, civil service, or teaching. Women may experience a second marriage.'},
+  '494': {cn:'正：想好了拿到成果不再去想就能成就自己。 负：想完了又想，停留在过去的人，容易神经衰弱。 善于策划，并且一直会朝着成功的方向去经营自己的人生；具备一定的战略思维，看得较远，想得也很周全；如果能在商场中找到一席之地，前途不可限量。 想得很多，需要别人推一把。机会来了，把握不住。', en:'Strengths: Once results are achieved, moving forward without looking back leads to personal fulfilment. Challenges: Replaying the past instead of moving forward causes persistent mental fatigue and nervous exhaustion. A gifted strategist who continuously moves toward success; possesses strategic thinking that sees far ahead and plans comprehensively; if a foothold in business is established, potential is limitless. Tends to think too much — needs a push to act. When opportunity arrives, struggles to seize it.'},
+  '516': {cn:'正：五方进财。 负：固执且自我的去赚钱，一旦行业选错很难回头。 性格倔强，把自己看得很重；坚持自己的原则，尤其在处理事务时，但有时有点以自我为中心；到处奔波，时常出国，到远方才能找到财富。 适合出去发展，参考156。', en:'Strengths: Wealth can come from five directions. Challenges: Stubbornness and self-interest in the pursuit of money means choosing the wrong path makes course-correction extremely difficult. Strong-willed and self-important; steadfast in principles especially in handling affairs — sometimes self-centred; thrives in unfamiliar environments and foreign places where new possibilities emerge. Best suited to developing outside the hometown — particularly for men. Can be arrogant, stubborn, and prone to criticism; susceptible to addictive habits. Strong direction and self-autonomy — earns independently.'},
+  '527': {cn:'正：目标方向明确，张开嘴吸引人。 负：固执的去说易伤人，刨根问底。 容易出帅哥美女。 讲话的态度会很生硬，尤其会将原则和权力作为交谈的和重点；生性固执，喜欢依照原则办事；但在处理事务时难免遇到一些阻碍。人缘非常好，但是分别心过重让贵人却步。 说话固执，说到做到。一言九鼎。五官端正。', en:'Strengths: Clear direction and purpose — able to attract others through speech. Challenges: Stubborn speech easily wounds people; a tendency to question and probe relentlessly. This combination often produces people of striking appearance. Speaks with a firm, sometimes harsh tone — places heavy emphasis on principle and authority; extremely principled; inevitable obstacles arise when handling complex matters. Excellent social standing but excessive judgment causes benefactors to keep their distance. Words carry absolute weight — says what is meant, means what is said. Well-proportioned and presentable in appearance.'},
+  '538': {cn:'正：有目标的付出就会拿到权利。 负：固执的去行动渴望别人的尊重。 有着良好的沟通能力，善于和陌生人打交道；如果是在销售行业发展自己的事业，会有不错的业绩；很容易被煽动，缺乏耐性，有点情绪化。脾气比较暴躁，容易冲动。 磨难多，固执，情绪化，需要多做善事。', en:'Strengths: Purposeful effort with a clear goal leads to authority and influence. Challenges: Impulsive pursuit of goals fuelled by desire for respect creates self-imposed pressure. Strong communication skills — comfortable engaging with strangers; business development in sales or service industries yields solid results; easily provoked and impatient, with a degree of emotional reactivity that passes quickly. Hot-tempered and prone to impulsive reactions — many difficulties ahead. Doing good deeds is advised.'},
+  '549': {cn:'正：正确的目标，周密的计划可以拿到成果。 负：固执的策划去拿结果，容易误入歧途。 做任何事情，都希望事先有计划，并且要按照原则来办；在事情出现预料之外的情况时明确发变通的能力；有时候为了某种目的会不惜耍耍手段。 比较累，要么大赚要么大赔，凡是求稳。', en:'Strengths: The right goals combined with thorough planning lead to real results. Challenges: Stubborn planning with a fixed outcome in mind invites misguided paths and unintended consequences. Approaches everything with a prior plan and insists on principle; adapts clearly when things deviate from expectations; occasionally uses calculated means to achieve a desired end. Prone to extremes — either a significant win or a significant loss. Stability above all else.'},
+  '551': {cn:'正：按照自己的目标去努力就能成就自己，不容易被别人左右。 负：固执的对自己，自我伤害，做事偏激。 性格倔强，认死理，甚至为了面子不惜错过成功的机会；坏脾气，情绪化，明知道自己错了，就是不肯回头思想偏向古老，没主见。 过于自我，太固执。容易做大反派。', en:'Strengths: Working toward one\'s own goals with determination — not easily swayed by others. Challenges: Overly rigid self-criticism and extreme actions become self-destructive. Stubborn to the point of inflexibility — would rather sacrifice opportunity than lose face; bad-tempered and emotional; knows when something is wrong yet refuses to reconsider; holds outdated views and lacks personal direction. Excessively self-focused and immovably stubborn. Can easily become one\'s own greatest adversary.'},
+  '562': {cn:'正：方向明确的去赚钱，该花的钱花了就赚钱了，花的越多赚的越多。 负：省着省着窟窿等着。 是一个非常谨慎的人，尤其是在使用金钱方面，崇尚理性消费；对于财务问题非常谨慎，不会冒险投资，对金钱问题很有原则。 花钱犹豫，为小事挑剔，小气。多行善，大气方能成事。', en:'Strengths: A clear direction to earn money — spending appropriately to earn more; greater outlay generates greater return. Challenges: Excessive caution and hoarding creates the very financial holes one fears. Extremely cautious — especially with money; advocates rational spending; very careful with financial decisions; avoids risky investments; firm principles around money. Hesitates over expenditure; overly critical about small matters; tight with money. Generosity in action leads to greater achievement.'},
+  '573': {cn:'正：有目标的吸引贵人帮你行事。 负：固执的不与高层交往，不主动，容易遭人排挤。 有充足的自信心，对自己的要求也很高；有机会接触搞层次人士和社会名流，并有机会和高级政府人员达成交易。喜欢品牌和奢侈品。 固执，有机会接触高层次的人脉。', en:'Strengths: Clear purpose — uses it to attract benefactors who will act on your behalf. Challenges: Stubbornness in avoiding high-level connections and a passive stance invites marginalisation. High self-confidence with equally high personal standards; has genuine opportunities to meet influential individuals and high-level society figures, including senior officials with potential for meaningful collaboration. Drawn to premium brands and luxury. Stubborn, yet connected to elevated circles of influence.'},
+  '584': {cn:'正：方向明确，愿意承担为未来做好规划。 负：固执己见，看待事情太遥远无法活在当下。 看起来总是那么繁忙和迷茫，缺乏重点；是一个非常有创意的人，不过所有事情都必须自己承担；想太多爱遥远的事，无法活在当下。 想得多，压力大，要面对现实，脚踏实地。', en:'Strengths: A clear sense of direction paired with willingness to take responsibility and plan for the future. Challenges: Tunnel vision and an obsession with distant futures makes living in the present impossible. Often appears busy and confused — lacks clear focus; a highly creative person who must carry all responsibility alone; too absorbed in remote possibilities to live in the present moment. Overthinks, carries too much pressure — must face reality and keep both feet on the ground.'},
+  '595': {cn:'正：有很明确的方向去得到机会，坚定目标可完成。 负：胆子大，不成功便成仁。 非常固执，思维方式极为古板；不把法律看在眼里；如果是女性的话，会用某种手段获取想要的东西。天不怕地不怕，不按理出牌。 因为固执，古板，阻力很大，敢于践踏法律。大哥大，大姐大。', en:'Strengths: A very clear direction — opportunistic and goal-oriented; with firm commitment, results are achievable. Challenges: Recklessness — an all-or-nothing approach to risk. Extremely stubborn with a rigid, old-fashioned way of thinking; shows little regard for rules or authority; women with this number may use strategic means to obtain what they want. Fearless and unconventional — not one to play by the rules. A dominant, commanding personality.'},
+  '617': {cn:'正：用智慧自信的与人合作，就可以白手起家。 负：钱来了按照自己的意愿与人交往，易藏私房钱。 性格坚强独立，非常感性，将心比心，对别人的痛苦感同身受；长袖善舞，喜爱信口开河，但人际关系不错；如果发挥口才方面的优势，会赚到很多钱。 167 舍得花钱，用名牌，有私房钱。', en:'Strengths: Using wisdom confidently in collaboration with others enables one to build an empire from scratch. Challenges: Letting money dictate relationships leads to hidden financial reserves being kept from partners. Strong and independent; deeply empathetic — feels others\' pain as one\'s own; socially gifted and talkative, though inclined toward exaggeration; good interpersonal skills; when verbal talents are leveraged, significant wealth is achievable. Spends freely on quality; keeps personal funds private.'},
+  '628': {cn:'正：用智慧去说获得权利。 负：钱来了让自己犹豫不决而产生压力，容易走捷径。 信口开河，容易食言，适合服务行业，很能赚钱，适合做销售。', en:'Strengths: Wisdom applied to speech leads to positions of influence. Challenges: Money arriving leads to wavering and pressure — prone to taking shortcuts. Prone to overpromising — may not always follow through; well-suited to service industries; strong earning ability in sales.'},
+  '639': {cn:'正：用智慧去行动，容易拿到成果。 负：用钱冲动的换结果，大花筒。 挥霍无度，很花心；热衷投资，但有时候的投资行为显得过于冒失；有轻微的购物癖，会买很多用不上的东西；喜欢外出，不喜欢闷在家里。 烧钱,为朋友，喜欢钱生钱，不喜欢在家。', en:'Strengths: Acting from a place of wisdom leads naturally to positive outcomes. Challenges: Impulsively spending money to force results makes one a big spender by nature. Spends without restraint; enthusiasm for investment but sometimes too reckless; a mild compulsion to purchase things that may not be needed; loves being out and about — dislikes being confined at home. Freely spends for friends; drawn to making money work for money; dislikes staying in. Capable of both significant spending and earning.'},
+  '641': {cn:'正：运用智慧去策划就能成就自己。 负：钱来了只想着自己，容易被钱所困。 小心翼翼地对待自己的金钱，消费时也很励志；是优秀的财务规划师；在学业上会话费很多时间；喜欢涉猎新知识。很聪明，非常有智慧的人，策划能力很强。挑剔，斤斤计较，失去朋友，财务，策划，喜欢向知识投资。', en:'Strengths: Applying wisdom to planning leads to personal achievement and success. Challenges: Becoming consumed by money — money-minded to the point of isolation. Very careful and mindful with personal finances; excellent financial planner; dedicates considerable time to education and learning; loves acquiring new knowledge. Extremely intelligent and highly capable in strategic planning. Critical and detail-focused — risks losing friends. Financial planning, strategy, and a love of knowledge investment.'},
+  '652': {cn:'正：运用智慧有目标有方向的去说，赚钱会更容易。 负：耍小聪明有目的的去说让别人拿钱的事，省着省着窟窿等着，容易让别人瞧不起。 谨小慎微，免费任何事情都会考虑再三才做决定；在处理有关金钱方面的事务时，更显得敬小慎微；对于投资、大宗物品的而购买总是犹豫不决。 小气，固执 唠叨，守财奴。', en:'Strengths: Using wisdom with clear direction and purpose in speech makes earning easier. Challenges: Using cleverness with ulterior motives — speaking to extract money from others leads to people losing respect; excessive frugality creates the very scarcity one fears. Cautious and careful — considers everything multiple times before deciding; especially meticulous when money is involved; perpetually indecisive about investments or major purchases. Tight with money, stubborn, and prone to nagging — a hoarder at heart.'},
+  '663': {cn:'正：钱来了用智慧去行动，会有收获。 负：喜欢冲动的投资。 在赚钱的道路上一波三折，很难积蓄金钱；有时花钱太冲动，缺乏理智，不顾后果；喜欢吹牛，脾气大，容易被激怒。 喜欢投资，一有钱就投资，口袋钱不多，进出很快。', en:'Strengths: When money arrives, wisdom applied to action produces rewards. Challenges: Prone to impulsive investment decisions. The path to wealth is rarely smooth — accumulating money is difficult; spending is sometimes too impulsive without regard for consequences; tends to boast, has a sharp temper, and is easily provoked. Drawn to investment — acts immediately when funds are available; little remains in the pocket; money flows in and out quickly.'},
+  '674': {cn:'正：运用智慧吸引贵人帮你规划。 负：善用钱与人交往，天生傲骨。 做事有一定的目的性，尤其喜欢用金钱收买有权势、有影响力的人；在遇到较难解决的问题时，首先会想到用金钱打开门路。 花钱在贵人身上，花钱打通关系。', en:'Strengths: Applying wisdom to attract benefactors who will plan and strategise on your behalf. Challenges: Using money deliberately to cultivate relationships — a natural air of superiority. Goal-driven with a particular preference for using money to build influence with powerful or well-connected people; when facing difficult problems, the first instinct is to use money to open doors. Invests money in relationships with powerful people to navigate pathways.'},
+  '685': {cn:'正：运用智慧获得权利，明确方向，可成大事。 负：用钱解决压力，容易受到阻碍，做跟功德相关的事。 赚钱很不容易，投资又不会轻易获得回报；总是为谋生奔走忙碌，有时压力重重；多做一些善事，或许金钱会不招自来。 赚钱很累，需要做善事，需要赚正财，别赚偏财。', en:'Strengths: Wisdom applied to overcome all obstacles leads to real power — clarity of direction enables great achievement. Challenges: Using money to escape pressure creates more obstacles — only virtuous, merit-building actions can preserve wealth. Life is unsettled with many challenges constantly emerging; persistence, continuous effort, and commitment to meaningful work ultimately yields significant wealth. Has a deep curiosity for subjects of interest and tends toward thorough research. Relatively stubborn in character. A wanderer through hardship — doing good deeds is the key to breakthrough.'},
+  '696': {cn:'正：用智慧赢得机会去赚钱，滚雪球式的赚钱。 负：赚到钱了还需要去赚钱。 你是一个能承担风险的人，事业与生意都会成功。喜爱投资，是一个冒险家；不可以赌，只能做理性投资才能赚更多的钱。 不能赌博，喜欢用钱生钱，喜欢投资，但是投资需谨慎。', en:'Strengths: Wisdom used to seize opportunities and build wealth — money compounds like a snowball. Challenges: Once wealth is obtained, the drive to continue earning never ceases. Capable of bearing risk — both career and business will succeed. Loves investment and possesses an adventurous spirit; gambling is absolutely to be avoided — rational investment is the only path to greater wealth. Cannot gamble; prefers to grow money through considered investment — must exercise caution.'},
+  '718': {cn:'正：人来了会给你带来权利，不担保，不自我。 负：来的人都会给你带来压力，躺着都中枪，背黑锅。 坚强独立，有强烈领袖气质，弱点是女里追求目标时，反而裹足不前。会被朋友在背后议论，会被人陷害，小心身边人，别做担保人。 容易被朋友利用，别做担保。', en:'Strengths: People who come bring authority and opportunity — without self-importance, without guaranteeing for others. Challenges: People who come bring pressure — one can be blamed even while standing still; a scapegoat by circumstance. Strong and independent with a powerful leadership presence; the weak point is hesitation precisely when goals are within reach. Will be discussed behind one\'s back; risk of being set up — be cautious of those closest; never act as a guarantor for others. Easily exploited by friends — do not co-sign or guarantee for others.'},
+  '729': {cn:'正：人主动帮你去说，你就会获得成功。 负：人会给你带来犹豫不决而错失机会。 温暖亲切，感情丰富，善解人意，身边有很多朋友，而且他们也愿意回报你；有很好的桃花运，但切记不 要滥情。 能吸引比自己大的高级桃花，人缘好，贵人多。', en:'Strengths: Others proactively speak on your behalf — this is the foundation of success. Challenges: Others create hesitation and indecision that causes opportunities to be missed. Warm and emotionally rich; empathetic and well-loved; surrounded by many friends who genuinely reciprocate. Strong romantic fortune — discretion is essential to avoid misusing this energy. Attracts more senior, high-quality romantic interests; excellent social energy and many benefactors.'},
+  '731': {cn:'正：人来了不冲动，就会成就自己，吸引人脉能力强。 负：人会给你带来冲动，控制不住脾气就会招别人背叛。 才华横溢，创造力丰富，原创思考型的人物；疑心重，可能会影响到不如成功的巅峰；和朋友们相处不久长。 脾气急躁，人缘易变动，疏远。', en:'Strengths: When people arrive, maintaining composure leads to personal success — strong ability to attract and retain a network. Challenges: People trigger impulsive reactions — inability to control one\'s temper invites betrayal. Brilliantly talented and highly creative — an original thinker; prone to excessive suspicion that may limit reaching the highest levels of success; friendships and alliances tend to be short-lived. Quick-tempered; unstable social circle; relationships easily drift apart.'},
+  '742': {cn:'正：人主动来帮你策划，只要你一说就会获得财富。 负：人来帮你策划了，你还只说不动，行动力差。 会得到不少人的帮忙，很多你敬重的人、经验丰富的人都会主动给你协助或为你提供好的建议；善于解决问题，不喜欢冒险。 善于分析策划，解决问题。运气不错，遇到问题有贵人指点。想的多，不喜欢冒险。逃避。', en:'Strengths: Others arrive to plan on your behalf — speaking up is all that is needed to attract wealth. Challenges: Even with others planning, remaining passive and action-free means wealth stays out of reach. Receives considerable support from respected, experienced people who volunteer guidance and good advice; a natural problem-solver who dislikes risk. Excellent at analysis and strategy — resolves problems effectively. Good fortune; benefactors offer guidance when challenges arise. Overthinks and avoids risk — a tendency to evade.'},
+  '753': {cn:'正：人来了有目标帮你行动，获得权利。 负：人来了有目的的让你冲动，官司号。 朋友或支持者可能会背板你、出卖你；你很会利用别人，但有时反而被小人利用；要小心你亲近的朋友甚至一直支持你的人会用卑鄙的手段陷害你。 喜欢利用别人，算计别人，容易遇到小人，出卖他，自己要正，人员容易变动，手下人能力强。', en:'Strengths: People arrive with purpose and drive action — leading to authority and influence. Challenges: People arrive with their own agenda — triggering impulsive reactions leads to legal entanglements. Friends or supporters may eventually betray or sell out; skilled at leveraging others, but sometimes the tables are turned and one is exploited by lesser people; must be cautious of close friends and long-time supporters who may resort to underhanded means. Prone to using and calculating others — easily encounters opportunists in return. Keep oneself upright; network is unstable but subordinates are capable.'},
+  '764': {cn:'正：人来了用智慧帮你策划。 负：人来了挑剔的选择对自己有利的人，容易伤害到别人。 你是一个幸运的人，会遇到贵人和支持者，还能在智慧和资本方面得到很好的援助；有一些不错的朋友，但要处理他们和你之间的借贷关系；容易有以外的财富收获，并有机会获得遗产或祖传的技术。 贵人很多，帮你的人多，机会来了，能赚很多钱。', en:'Strengths: People arrive equipped with wisdom and the ability to plan on your behalf. Challenges: Selectively choosing only those who benefit oneself easily harms others. An exceptionally fortunate person — benefactors and supporters arrive naturally; receives meaningful help in the form of both wisdom and capital; good friendships, though financial boundaries must be maintained carefully; unexpected wealth may arrive, including through inheritance or ancestral skills. Many people willing to help; when opportunities arrive, significant wealth is possible.'},
+  '775': {cn:'正：人来了主动付出，就会给你带来方向。 负：人来了先要回报，就会给你带来阻碍。 建议：吸引贵人。 你是个非常幸运的人，所欲的障碍会被克服，有许多支持者，会尽利用支持者，有权威的领导者，会吸引异性；愿意为朋友两肋插刀。 心态很重要，要么贵人多，要么小人多，善于为朋友付出。', en:'Strengths: When people arrive, proactively giving of oneself brings direction and clarity. Challenges: Expecting returns before giving anything drives benefactors away. Recommendation: Focus on attracting benefactors. An exceptionally fortunate individual — all obstacles are overcome; many supporters who work tirelessly; excellent at leveraging support and leading with authority; naturally attracts the opposite sex. Willing to go the extra mile for friends. Mindset determines everything — cultivate the right one and benefactors multiply; the wrong one and opportunists fill the space.'},
+  '786': {cn:'正：异性会主动来帮你赚钱。 负：顶不住异性压力就会破财。 你有很多的男性贵人或支持者，他们会为了你的成功而向你试压，你若能处理好并且接受挑战，就能赚到很多钱。你是一位刻苦耐劳的好员工。 贵人很多，接受别人的压力，一定能好，要敢于承担，风雨过后有彩虹。', en:'Strengths: The opposite sex will proactively assist in building wealth. Challenges: Inability to withstand pressure from the opposite sex leads to financial loss. Many male benefactors and supporters who apply pressure in service of your success — accepting the challenge and rising to meet it leads to significant earnings. A hardworking and reliable team member. Accept the pressure from benefactors and powerful supporters — endurance always leads to reward. Have the courage to take responsibility; after the storm, the rainbow awaits.'},
+  '797': {cn:'正：人缘好，瞬间会和周围人成为朋友。 负：人来了帮你拿到结果后又来人了容易遭人嫉妒。 建议：吸引贵人。 支持者会协助你达到成就，或者有可能会有兴趣和你发展成为生意伙；你要积极行动，不要因为自信不足而变成一个失败者。 人源贵人多，心态如果不正，借刀杀人，最后肯定失败。', en:'Strengths: Excellent social energy — effortlessly becomes friends with those nearby. Challenges: When people help achieve results and more people follow, envy and jealousy become a risk. Recommendation: Focus on attracting genuine benefactors. Supporters help achieve real accomplishments; potential business partnership opportunities emerge naturally; must take active steps forward — lack of confidence is the only path to failure. Rich in benefactors — if the mindset is right, they multiply; if intentions turn manipulative, failure is inevitable.'},
+  '819': {cn:'正：所有压力都是自己扛，有担当。 负：压力来了，一个人去扛要结果，你能扛多久，所以容易得心脑血管病。 建议：平衡五行。 看似坚强独立，实际不然，常挣扎帮人与不帮人之间，经常付出多于回报，是一个很勤劳和事事关心的领袖，很忙碌，要面对很多压力才能成功。是位典型的完美主义者。 比较累，事事操劳。凡是看开。', en:'Strengths: Bears all pressure personally — a person of genuine accountability. Challenges: Shouldering everything alone while demanding results — the question is how long this can be sustained; this level of pressure significantly elevates cardiovascular health risk. Recommendation: balance the Five Elements. Appears strong and independent but is not — frequently torn between helping others and self-preservation; gives more than receives; a hardworking and caring leader who is perpetually busy; must face considerable pressure before succeeding. A true perfectionist. Carries the weight of everything — learn to let go and see things with perspective.'},
+  '821': {cn:'正：压力来了敢于张开嘴去说就能成就自己。 负：压力来了，犹豫不决的自己面对，不愿与人合作。 喜欢听好话，不好听的话就会当耳边风；性格固执，很多时候需要自己解决问题；感情丰富多变，呈现即坚强又敏感面貌。具有非常好的销售能力，销售冠军的密码。 固执，喜欢听好听话，内心空虚，自卑。', en:'Strengths: When pressure arrives, having the courage to speak up and express oneself leads to personal success. Challenges: When pressure arrives, wavering and choosing to face it alone — unwillingness to collaborate. Loves to hear positive things; dismisses criticism without consideration; stubborn — must often resolve problems independently; emotionally rich and changeable, appearing both strong and sensitive. Possesses outstanding sales ability — the code for a top sales champion. Stubborn; craves validation; inwardly empty and lacking in self-worth.'},
+  '832': {cn:'正：压力来了，积极去沟通，会有意想不到得收获。 负：压力来了，冲动的去说，容易产生情绪波动。 建议：平衡水火冲。 敏感，容易被挑衅，情绪化，没耐性，容易被激怒，常被压力困扰；喜欢迅速完成手上的事情，但又因为重重阻碍而不能达到预期。 情绪化，敏感，脾气不好。', en:'Strengths: When pressure arrives, proactive communication yields unexpected and pleasant results. Challenges: Impulsive speech under pressure leads to emotional turbulence. Recommendation: balance the Water-Fire conflict. Sensitive and easily provoked; emotional with little patience; frequently triggered and overwhelmed by pressure; seeks to complete tasks quickly but recurring obstacles prevent expected outcomes. Emotional, sensitive, and short-tempered.'},
+  '843': {cn:'正：压力来了懂得策划后再行动，成为专家。 负：压力来了想不明白如何去行动，在陷入旋涡中走不出来。 想法很多，但一直徘徊不定，有很多目标，反而没有目标；如果能跟随一个强有力的领导者，作为二把手，就能显示自己的能力。容易知足，在生活的细节容易迷糊。 参考483，找已婚人士结婚，适合当二把手。感情糊涂，压力多，专业人士。', en:'Strengths: When pressure arrives, careful planning followed by decisive action builds expertise and mastery. Challenges: Pressure leads to mental paralysis — unable to decide how to act, trapped in a spiral. Full of ideas but perpetually indecisive — many goals paradoxically result in no clear goal; following a strong, decisive leader as a capable second-in-command is where real ability shines. Tends toward contentment; mentally muddled in day-to-day details. Similar to 483 — suited as a deputy. Seek a stable partner. Well-suited to professional or specialist roles. Emotionally confused under pressure.'},
+  '854': {cn:'正：顶住压力确定方向为未来做好规划。 负：一有压力就固执的憧憬未来，无法活在当下。 一个很有创意的人，但想法过多，难免会给自己带来很多没必要的麻烦；无法活在当下，一旦在交际、做事的时候遇到阻碍，就会很悲观。 （父亲基因）挫折，磨难，想的多，不面对现实。', en:'Strengths: Facing pressure with a clear direction and forward-looking plans for the future. Challenges: The moment pressure appears, fixation on the distant future makes living in the present impossible. A highly creative individual, but excessive ideas inevitably create unnecessary complications; unable to engage fully with the present — when obstacles appear in relationships or work, pessimism takes hold quickly. Drawn to hardship, lessons through adversity — overthinks, evades reality.'},
+  '865': {cn:'正：压力来了能用智慧去克服所有障碍。 负：压力来了用钱去寻找反方向，只有做功德的事才能守住才。 生活不定，四处飘泊，需要解决很多不断涌来的困难；但只要坚持，不断投入精力，并在有兴趣的工作岗位上努力奋斗，就会收获很多财富。对于感兴趣的事情喜欢做深入的研究，个性比较固执。 漂泊，磨难多。要行善才能突破。', en:'Strengths: When pressure arrives, wisdom enables one to overcome every obstacle. Challenges: Using money to find an escape from pressure causes it to backfire — only merit-building and virtuous actions can truly preserve wealth. Life is unsettled with unrelenting challenges; but with persistence, sustained effort, and dedication to meaningful work, significant wealth accumulates. Possesses deep curiosity and a thorough approach to subjects of interest. Relatively stubborn. A wanderer and seeker through hardship — charitable action is the catalyst for real breakthrough.'},
+  '876': {cn:'正：主动的寻找异性支持，顶住压力方能获得财富。 负：主动的寻找异性支持，顶不住压力就会破财。 你是一个很勤勉的人，但是会给你周围的人带来很多压力；辛勤劳作的你会遇到知音的欣赏；你的男上司会给你很多压力。 在贵人，人缘给了你压力，指示下边人。敢于承担便能成大气。', en:'Strengths: Proactively seeking the support of the opposite sex and standing firm under pressure leads to wealth. Challenges: Yielding to pressure from the opposite sex results in financial loss. A diligent, hardworking person — but can inadvertently create significant pressure for those around them; hard work will attract appreciation from kindred spirits; a male superior will apply considerable pressure. Benefactors and social energy create pressure from above and command from below — the courage to bear this pressure is the path to great achievement.'},
+  '887': {cn:'正：压力来了，承担责任就会有贵人支持。 负：因为压力重重而情绪暴躁，会造成婚姻波折。 建议：平衡水火冲。 你是一个很忙碌、情绪化和处于许多大压力下的人，太多的压力让你无法集中精神；要珍惜贵人的帮忙，不要让他们失望。 离婚率很高，情绪化，爱发火，疏远朋友。', en:'Strengths: When pressure is immense, taking responsibility attracts the support of benefactors. Challenges: The weight of pressure leads to emotional volatility, causing turbulence in marriage. Recommendation: balance the Water-Fire conflict. A perpetually busy, emotional person operating under enormous and multiple pressures — too much pressure makes focus impossible; must cherish the support of benefactors and not let them down. High likelihood of separation or divorce — emotionally reactive and prone to outbursts. Pushes friends away.'},
+  '898': {cn:'正：顶住压力就有机会拿到权利。 负：压力来了，已经拿到结果还要面对压力，忙得脚不沾地都是别人的事，由于压力过大容易出现疾病。男士注意心脏，女士注意妇科 。 建议：平衡五行。 从表面看，你的事业或生意很让人羡慕，但实际上你自己感觉一直是在瞎忙；你总是被压力和紧张的情绪困扰，并且一直在努力摆脱这种困境。太在意别人对你的评价。', en:'Strengths: Enduring pressure leads to genuine authority and influence. Challenges: When pressure arrives and results are already achieved, more pressure follows — perpetually busy with everyone else\'s affairs; excessive pressure leads to physical illness. Men should pay attention to heart health; women should monitor gynaecological health. Recommendation: balance the Five Elements. On the surface, career and business appear admirable; internally, the constant feeling of spinning one\'s wheels; persistently troubled by pressure and tension, always working to break free from it. Overly concerned with others\' opinions.'},
+  '911': {cn:'正：机会来了自信的与人合作，就能成为领导。 负：机会来了一个人自我的去打拼，不容易成功。 你很在意自己是否有独立空间，以至于你会长期独身；你可能是个独资经营者，所有的事都想一人独自完成，是一个孤单的管理者。过于的渴望独立，所以要注意感情的功课。 孤独的行者，记住别贪心。', en:'Strengths: When opportunity arrives, collaborating with others with confidence leads to genuine leadership. Challenges: When opportunity arrives, pursuing it alone in self-sufficient isolation makes success difficult. Values personal space deeply — to the point of prolonged solitude; often a sole proprietor who wants to complete everything independently — a solitary manager. Excessive desire for independence means emotional development requires deliberate attention. A lone traveller on the path of life — remember, do not become greedy.'},
+  '922': {cn:'正：机会来了有耐心的去沟通，方可获得财富。 负：机会来时你却犹豫不定，容易大起大落。 你有很强的说服力，喜欢就生意方面的问题发表自己的诸多看法；你有很好的抓住商机的天赋，但需要充分把握，才能成功投资。军师号码，典型的诸葛亮，适合做中介，资源整合。 适合出谋划策，说得多，做得少。', en:'Strengths: When opportunity arrives, patient communication enables wealth to be attained. Challenges: When opportunity arrives, indecision leads to dramatic rises and falls. Possesses strong powers of persuasion; loves discussing business strategy and opportunity; a natural talent for recognising and seizing commercial opportunities — but full execution is required for successful investment. The strategist\'s number — the classic advisor, well-suited to intermediary roles and resource integration. Offers counsel and strategy — talks more than acts.'},
+  '933': {cn:'正：机会来了理智的去行动，可获得财富。 负：机会来了，盲目的去行动，错失财富；肿瘤高发。 有很多想法，有创意，喜欢帮家人安排所有的事业；有时候想法较为固执，注意范围无法扩展；你做的生意都很短期，会在寻找适合的生意方面花费很多精力。拥有才艺的特质。脾气较急躁。 心灵手巧，缺少耐心，不要总是变动。', en:'Strengths: When opportunity arrives, measured and rational action leads to wealth. Challenges: Acting blindly when opportunity arises causes wealth to be missed — and elevated risk of tumours. Many ideas and genuine creativity; loves managing all family matters; can sometimes be stubborn in thinking, which limits wider expansion; business ventures tend to be short-term — significant energy goes toward finding the right fit. Possesses a distinctive practical talent or craft. Tends toward impatience. Dexterous and creative — avoid constant change.'},
+  '944': {cn:'正：机会来了精心策划不要多想方能获得成功。 负：要么很好，要么很不好，本来是企业家的变成阶下囚，本来腰缠万贯变成穷困潦倒。 在事业上有机会发展，不过没有固定的目标，经常修改、规划你的事业；因为目标太多，不利于尽快成功；但一旦目标稳定，你就会经过周详计划，并取得较好利润。 做事想得多，来回改，适合做学者，如果自己做老板，一定要想少点。', en:'Strengths: When opportunity arrives, careful planning without excessive thinking leads to success. Challenges: Either very good or very bad — what was entrepreneur-level potential becomes failure; what was tremendous wealth becomes deep poverty. Has genuine opportunity for career development, though without a fixed target, plans are constantly revised; too many goals hinders rapid success; once a stable target is set, thorough planning and sound execution produce strong returns. Overthinks and keeps revising — best as a scholar or academic; if entrepreneuring, think less and act more.'},
+  '955': {cn:'正：机会来了只要明确方向就能实现目标。 负：机会来了，因为固执会给自己带来更多的阻碍。 会有很多解决不了的问题，想要很多东西，而且得不到就会很不开心；比较自私自利，这是的你很容易占小便宜吃大亏。通常自己是成功的绊脚石，不喜欢按理出牌。 自私，固执，因为自己的自私失败，不要践踏法律。', en:'Strengths: When opportunity arrives, a clear sense of direction makes goals achievable. Challenges: When opportunity arrives, stubbornness creates more obstacles than the opportunity itself. Many unresolvable problems accumulate — craves many things and becomes unhappy when they are withheld; a degree of self-centredness leads to a pattern of gaining small advantages at great personal cost. Often one\'s own greatest obstacle — refuses to play by accepted rules. Selfish and stubborn — failure is often self-caused. Do not transgress boundaries.'},
+  '966': {cn:'正：机会来了运用智慧能获得财富。 负：机会来了，因为挑剔而错失财富，需要有个好名字，否自影响后代。 很好的运程，尤其是在做生意或投资方面，只要稍微努力一下，就会有好的利润或回报；很容易找到投资者，有点石成金的本事。 点石成金，能力强，运气好，能抓住机会，抓稳一个再抓下一个，别太贪心。', en:'Strengths: When opportunity arrives, wisdom turns it into wealth — fortune compounds steadily. Challenges: Excessive pickiness when opportunity arrives causes wealth to slip away; a strong personal name is important, as it affects future generations. An outstanding outlook — especially in business and investment; even modest effort produces strong returns; easily attracts investors; has an almost alchemical ability to turn resources into gold. Has the golden touch — strong in ability and fortune; seizes opportunities well — secure one before pursuing the next; do not become greedy.'},
+  '977': {cn:'正：交朋友的机会多，很容易跟身边人打成一片。 负：机会来了，不善待别人就会招小人。 建议：吸引贵人。 有很好的理财头脑，做生意或投资都会有丰厚的报酬；身边有贵人也有小人，如不利用人，就不会遇上小人；是一个有号召力、魅力型的人。 容易招桃花，贵人，小人，别利用别人。', en:'Strengths: Abundant opportunities to connect — naturally clicks with those nearby. Challenges: When opportunity arrives, treating others poorly invites opportunists and detractors. Recommendation: Focus on cultivating genuine benefactors. A sharp financial mind — business and investment both yield strong returns; surrounded by both benefactors and opportunists; as long as others are not deliberately exploited, the opportunists stay away. A person of magnetic charisma and genuine rallying power. Prone to attracting romantic interests, benefactors, and detractors alike — do not use others as instruments.'},
+  '988': {cn:'正：机会来了顶住压力就能有权利。 负：机会来了贪心的想拥有更多的权利，非常忙碌，身体容易出现疾病。男人注意心脏，女人注意妇科。 建议：平衡五行。 生意上会带给你各种没有必要的压力，这让你总是为此付出很多时间与精力，浪费许多时间到处奔波，很忙碌。拥有很大的企图心。男人注意肾脏问题，女人注意子宫问题，不可以做旁门左道的事业。 机会很多，比较贪心，压力很大，忙碌，四处奔波。男人注意心脏，女人注意子宫。', en:'Strengths: When opportunity arrives, enduring pressure leads to real authority. Challenges: When opportunity arrives, greed for more authority leads to extreme busyness and physical illness. Men should pay attention to heart health; women should monitor gynaecological health. Recommendation: balance the Five Elements. Business brings unnecessary pressure at every turn — enormous time and energy are consumed running in all directions; perpetually occupied. Possesses very strong ambition. Men should watch kidney health; women should monitor uterine health — avoid any business conducted outside legitimate means. Opportunities are many; greed is great; pressure is enormous; always in motion, always running.'},
+  '999': {cn:'正：机会很多，很容易有资产。 负：机会多，如果做事不专一，会失去很多很良好的生意机会，要么很好，要么很不好，要么腰缠万贯，要么穷困潦倒，要么儿孙满堂，要么孤独终老。 对生意有敏锐的眼光，拥有许多做生意的方法，能掌握许多生意机会；但如果做事不专一，会失去很多良好的生意机会。', en:'Strengths: Abundant opportunities — wealth and assets come with relative ease. Challenges: Too many opportunities without single-minded focus causes many excellent business prospects to be lost; all-or-nothing outcomes — either extraordinary wealth or deep poverty; either a house full of descendants or a life of solitude. A sharp eye for business with multiple methods for generating opportunity — capable of grasping many possibilities; but without focused commitment, the best opportunities slip away.'},
+};
 
 // Number element mapping (from spreadsheet)
 // 1=WATER,2=WATER,3=WOOD,4=WOOD,5=EARTH,6=METAL,7=METAL,8=EARTH,9=FIRE
@@ -584,7 +681,7 @@ function ic(le, lc, val, sub) {
 function descCard(n, isDestined) {
   var ch = CHARS[n] || ['',''];
   var title = isDestined
-    ? '<div class="dc-t"><span class="l-en">✦ Destined Dream — No.'+n+'</span><span class="l-cn" style="font-family:\'Noto Serif SC\'">✦ 命定数字 — '+n+'号</span></div>'
+    ? '<div class="dc-t"><span class="l-en">✦ Main Profile — No.'+n+'</span><span class="l-cn" style="font-family:\'Noto Serif SC\'">✦ 主性格 — '+n+'号</span></div>'
     : '<div class="dc-t"><span class="l-en">Character '+n+'</span><span class="l-cn" style="font-family:\'Noto Serif SC\'">'+n+'号人</span></div>';
   return '<div class="dc">'+title+
     '<div class="dc-en l-en">'+ch[0]+'</div>' +
@@ -617,10 +714,28 @@ function comboTable(data) {
   for (var i = 0; i < data.combos.length; i++) {
     var c = data.combos[i];
     var nums = c.v.join('');
+    var uid = 'combo-detail-'+i;
+    // Build dropdown options: all valid 3-digit permutations of the 3 numbers
+    var perms = getComboPerms(c.v);
+    var opts = '';
+    for (var pi = 0; pi < perms.length; pi++) {
+      var pk = perms[pi];
+      var exists = COMBOS81[pk] ? '' : ' (no data)';
+      opts += '<option value="'+pk+'">'+pk+exists+'</option>';
+    }
     rows += '<tr>' +
       '<td class="c-idx">'+(i+1)+'</td>' +
-      '<td class="c-name"><span class="l-en">'+c.name+'</span><span class="l-cn" style="font-family:\'Noto Serif SC\'">'+c.nameCn+'</span></td>' +
-      '<td class="c-nums">'+nums+'</td>' +
+      '<td class="c-name" style="width:100%">' +
+        '<div><span class="l-en">'+c.name+'</span><span class="l-cn" style="font-family:\'Noto Serif SC\'">'+c.nameCn+'</span></div>' +
+        '<div class="combo-sel-row">' +
+          '<span class="c-nums">'+nums+'</span>' +
+          '<select class="combo-sel" onchange="showComboDesc(this,\''+uid+'\')">'+opts+'</select>' +
+          '<button class="combo-expand-btn" onclick="toggleComboDetail(\''+uid+'\')">' +
+            '<span class="l-en">▶ Read</span><span class="l-cn">解读</span>' +
+          '</button>' +
+        '</div>' +
+        '<div class="combo-detail" id="'+uid+'"></div>' +
+      '</td>' +
       '</tr>';
   }
   return '<div class="combo-collapsible">' +
@@ -630,10 +745,62 @@ function comboTable(data) {
     '</button>' +
     '<div class="combo-wrap" style="display:none"><table class="combo-table">' +
     '<thead><tr>' +
-    '<th>#</th>' +
-    '<th><span class="l-en">Category</span><span class="l-cn" style="font-family:\'Noto Serif SC\'">类别</span></th>' +
-    '<th><span class="l-en">Numbers</span><span class="l-cn">数字</span></th>' +
+    '<th style="width:28px">#</th>' +
+    '<th><span class="l-en">Category · Numbers · Read Description</span>' +
+    '<span class="l-cn" style="font-family:\'Noto Serif SC\'">类别 · 数字 · 解读</span></th>' +
     '</tr></thead><tbody>'+rows+'</tbody></table></div></div>';
+}
+
+function getComboPerms(arr) {
+  // Generate all 6 permutations of 3 numbers, deduplicated
+  var a=arr[0],b=arr[1],c=arr[2];
+  var all = [
+    ''+a+b+c, ''+a+c+b, ''+b+a+c,
+    ''+b+c+a, ''+c+a+b, ''+c+b+a
+  ];
+  var seen = {}, result = [];
+  for (var i=0;i<all.length;i++){
+    if (!seen[all[i]]) { seen[all[i]]=true; result.push(all[i]); }
+  }
+  // Put the default (original order) first
+  var orig = ''+a+b+c;
+  result = result.filter(function(x){return x!==orig;});
+  result.unshift(orig);
+  return result;
+}
+
+function showComboDesc(sel, detailId) {
+  var key = sel.value;
+  var el = document.getElementById(detailId);
+  if (!el) return;
+  var d = COMBOS81[key];
+  if (!d) {
+    el.innerHTML = '<div class="combo-desc-box"><span style="color:var(--muted);font-size:.78rem">No description available for ' + key + '</span></div>';
+    el.classList.add('open');
+    return;
+  }
+  var enFormatted = d.en.replace(/\\n/g,'<br>');
+  el.innerHTML = '<div class="combo-desc-box">' +
+    '<div class="combo-desc-cn l-cn" style="font-family:\'Noto Serif SC\'">'+d.cn+'</div>' +
+    '<div class="combo-desc-en l-en">'+enFormatted+'</div>' +
+    '</div>';
+  el.classList.add('open');
+  applyLang();
+}
+
+function toggleComboDetail(detailId) {
+  var el = document.getElementById(detailId);
+  if (!el) return;
+  if (!el.classList.contains('open')) {
+    var row = el.closest('tr');
+    var sel = row ? row.querySelector('.combo-sel') : null;
+    if (sel) showComboDesc(sel, detailId);
+    else el.classList.add('open');
+  } else {
+    el.classList.remove('open');
+    el.style.display = 'none';
+    el.style.display = '';
+  }
 }
 
 function toggleCombos(btn) {
@@ -728,16 +895,256 @@ function doIT() {
     : '<span style="font-size:.82rem;color:var(--gold);font-family:\'Cinzel\',serif">None 无缺</span>';
   document.getElementById('it-miss').innerHTML = mh;
 
-  // Character descriptions
-  var seen = {};
-  var dh = descCard(data.dest, true);
-  seen[data.dest] = true;
-  var order = [data.vG, data.vC, data.vF, data.vI, data.vH];
-  for (var di = 0; di < order.length; di++) {
-    var dn = order[di];
-    if (dn >= 1 && dn <= 9 && !seen[dn]) { dh += descCard(dn, false); seen[dn] = true; }
+  // Character description: only show G (Main Profiling Type)
+  document.getElementById('it-descs').innerHTML = descCard(data.vG, true);
+
+  applyLang();
+}
+
+function doYCIT() {
+  var data = compute(
+    document.getElementById('ycit-d').value,
+    document.getElementById('ycit-m').value,
+    document.getElementById('ycit-y').value
+  );
+  var ty = parseInt(document.getElementById('ycit-ty').value);
+  if (!data || !ty) return;
+  var cn = rd(data.vC + rd(ty));
+  document.getElementById('ycit-emp').style.display = 'none';
+  var res = document.getElementById('ycit-res');
+  res.classList.add('on');
+  res.innerHTML = '<div class="slbl"><span class="l-en">Year '+ty+' · IT Method</span><span class="l-cn" style="font-family:\'Noto Serif SC\'">'+ty+'年流年 · 七魄法</span></div>' +
+    cycleResult(cn, 'Year '+ty+' Cycle (IT Method)', ty+'年流年周期（七魄法）');
+  applyLang();
+}
+
+function doYC() {
+  var data = compute(
+    document.getElementById('yc-d').value,
+    document.getElementById('yc-m').value,
+    document.getElementById('yc-y').value
+  );
+  var ty = parseInt(document.getElementById('yc-ty').value);
+  if (!data || !ty) return;
+  var cn = rd(data.dest + rd(ty));
+  document.getElementById('yc-emp').style.display = 'none';
+  var res = document.getElementById('yc-res');
+  res.classList.add('on');
+  res.innerHTML = '<div class="slbl"><span class="l-en">Year '+ty+' Personal Cycle</span><span class="l-cn" style="font-family:\'Noto Serif SC\'">'+ty+'年个人流年</span></div>' +
+    cycleResult(cn, 'Year '+ty+' Personal Year Cycle', ty+'年个人流年周期');
+  applyLang();
+}
+
+function doMC() {
+  var data = compute(
+    document.getElementById('mc-d').value,
+    document.getElementById('mc-m').value,
+    document.getElementById('mc-y').value
+  );
+  var cy = parseInt(document.getElementById('mc-cy').value);
+  var tm = parseInt(document.getElementById('mc-tm').value);
+  if (!data || !cy) return;
+  var yc = rd(data.dest + rd(cy));
+  var cn = rd(yc + tm);
+  var ME = ['','January','February','March','April','May','June','July','August','September','October','November','December'];
+  var MC = ['','一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+  document.getElementById('mc-emp').style.display = 'none';
+  var res = document.getElementById('mc-res');
+  res.classList.add('on');
+  res.innerHTML = '<div class="slbl"><span class="l-en">'+ME[tm]+' '+cy+' · Month Cycle</span><span class="l-cn" style="font-family:\'Noto Serif SC\'">'+cy+'年'+MC[tm]+'月份周期</span></div>' +
+    cycleResult(cn, ME[tm]+' '+cy+' Month Cycle', cy+'年'+MC[tm]+'月周期');
+  applyLang();
+}
+
+function doDC() {
+  var data = compute(
+    document.getElementById('dc-d').value,
+    document.getElementById('dc-m').value,
+    document.getElementById('dc-y').value
+  );
+  var td = document.getElementById('dc-td').value;
+  if (!data || !td) return;
+  var parts = td.split('-');
+  var ty = parseInt(parts[0]), tm = parseInt(parts[1]), tdd = parseInt(parts[2]);
+  var yc = rd(data.dest + rd(ty));
+  var mc = rd(yc + tm);
+  var dn = rd(mc + tdd);
+  var ds = String(tdd).padStart(2,'0')+'/'+String(tm).padStart(2,'0')+'/'+ty;
+  document.getElementById('dc-emp').style.display = 'none';
+  var res = document.getElementById('dc-res');
+  res.classList.add('on');
+  res.innerHTML = '<div class="slbl"><span class="l-en">'+ds+' · Day Cycle</span><span class="l-cn" style="font-family:\'Noto Serif SC\'">'+ty+'年'+tm+'月'+tdd+'日</span></div>' +
+    cycleResult(dn, ds+' Day Cycle', ty+'年'+tm+'月'+tdd+'日周期');
+  applyLang();
+}
+
+// ══════════════════════════════════════════
+// UI
+// ══════════════════════════════════════════
+var lang = 'en';
+function setLang(l) {
+  lang = l;
+  document.getElementById('btn-en').classList.toggle('on', l === 'en');
+  document.getElementById('btn-cn').classList.toggle('on', l === 'cn');
+  applyLang();
+}
+function applyLang() {
+  document.body.classList.toggle('len', lang === 'en');
+  document.body.classList.toggle('lcn', lang === 'cn');
+}
+function toggleTheme() {
+  var dark = document.body.dataset.theme === 'dark';
+  document.body.dataset.theme = dark ? 'light' : 'dark';
+  document.getElementById('thm').textContent = dark ? '🌙' : '☀️';
+  // Redraw shape if visible
+  var shapeEl = document.getElementById('it-shape');
+  if (shapeEl && shapeEl.innerHTML) {
+    var data = compute(
+      document.getElementById('it-d').value,
+      document.getElementById('it-m').value,
+      document.getElementById('it-y').value
+    );
+    if (data) shapeEl.innerHTML = buildShape(data);
   }
-  document.getElementById('it-descs').innerHTML = dh;
+}
+function showTab(n) {
+  document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('on'); });
+  document.querySelectorAll('.tbtn').forEach(function(b){ b.classList.remove('on'); });
+  document.getElementById('panel-'+n).classList.add('on');
+  document.getElementById('tab-'+n).classList.add('on');
+}
+
+window.addEventListener('load', function() {
+  applyLang();
+  doIT();
+});
+function showComboDesc(sel, detailId) {
+  var key = sel.value;
+  var el = document.getElementById(detailId);
+  if (!el) return;
+  var d = COMBOS81[key];
+  if (!d) {
+    el.innerHTML = '<div class="combo-desc-box"><span style="color:var(--muted);font-size:.78rem">No description available for ' + key + '</span></div>';
+    el.classList.add('open');
+    return;
+  }
+  el.innerHTML = '<div class="combo-desc-box">' +
+    '<div class="combo-desc-cn l-cn" style="font-family:\'Noto Serif SC\'">'+d.cn+'</div>' +
+    '<div class="combo-desc-en l-en">'+d.en+'</div>' +
+    '</div>';
+  el.classList.add('open');
+  applyLang();
+}
+
+function toggleComboDetail(detailId) {
+  var el = document.getElementById(detailId);
+  if (!el) return;
+  if (!el.classList.contains('open')) {
+    var row = el.closest('tr');
+    var sel = row ? row.querySelector('.combo-sel') : null;
+    if (sel) showComboDesc(sel, detailId);
+    else el.classList.add('open');
+  } else {
+    el.classList.remove('open');
+    el.style.display = 'none';
+    el.style.display = '';
+  }
+}
+
+function toggleCombos(btn) {
+  var wrap = btn.nextElementSibling;
+  var open = wrap.style.display === 'none';
+  wrap.style.display = open ? 'block' : 'none';
+  btn.setAttribute('aria-expanded', open);
+  var enSpan = btn.querySelector('.l-en');
+  var cnSpan = btn.querySelector('.l-cn');
+  if (open) {
+    enSpan.textContent = '▼ Hide 13 Number Combinations';
+    cnSpan.textContent = '▼ 收起13个数字组合';
+  } else {
+    enSpan.textContent = '▶ Show 13 Number Combinations';
+    cnSpan.textContent = '▶ 展开13个数字组合';
+  }
+}
+
+function cycleResult(n, te, tc) {
+  var nx = n === 9 ? 1 : n + 1;
+  var ch = CHARS[n] || ['',''];
+  return '<div class="cyc-d">' +
+    '<div class="cyc-n">'+n+'</div>' +
+    '<div class="cyc-i">' +
+      '<div class="cyc-il"><span class="l-en">'+te+'</span><span class="l-cn" style="font-family:\'Noto Serif SC\'">'+tc+'</span></div>' +
+      '<div class="cyc-iv l-en">'+CYC_T_EN[n]+'</div>' +
+      '<div class="cyc-iv l-cn" style="font-family:\'Noto Serif SC\'">'+CYC_T_CN[n]+'</div>' +
+      '<div class="nxt"><span class="l-en">Next →</span><span class="l-cn" style="font-family:\'Noto Serif SC\'">下一 →</span><span class="nxt-n">'+nx+'</span></div>' +
+    '</div></div>' +
+    '<div class="dc">' +
+      '<div class="dc-en l-en">'+CYC_EN[n]+'</div>' +
+      '<div class="dc-cn l-cn" style="font-family:\'Noto Serif SC\'">'+CYC_CN[n]+'</div>' +
+    '</div>' +
+    '<div class="orn">— ✦ —</div>' +
+    '<div class="dc">' +
+      '<div class="dc-t"><span class="l-en">Character '+n+'</span><span class="l-cn" style="font-family:\'Noto Serif SC\'">'+n+'号人</span></div>' +
+      '<div class="dc-en l-en">'+ch[0]+'</div>' +
+      '<div class="dc-cn l-cn" style="font-family:\'Noto Serif SC\'">'+ch[1]+'</div>' +
+    '</div>';
+}
+
+// ══════════════════════════════════════════
+// CALCULATORS
+// ══════════════════════════════════════════
+function doIT() {
+  var data = compute(
+    document.getElementById('it-d').value,
+    document.getElementById('it-m').value,
+    document.getElementById('it-y').value
+  );
+  if (!data) return;
+
+  document.getElementById('it-emp').style.display = 'none';
+  var res = document.getElementById('it-res');
+  res.classList.add('on');
+
+  // Info cards
+  var z = ZD[data.zodKey];
+  var ze = ELS[data.zodElem];
+  document.getElementById('it-cards').innerHTML =
+    ic('Date','日期', String(data.day).padStart(2,'0')+'/'+String(data.mon).padStart(2,'0')+'/'+data.yr) +
+    ic('Profile Type','主性格类型', data.vG, 'No. '+data.vG) +
+    ic('Zodiac','生肖', z.e+' '+ze.en+' '+z.en, ze.cn+' '+z.cn) +
+    ic('Profile Element','命理五行', '<span style="color:'+ze.c+'">'+ze.en+'</span>', '<span style="font-family:\'Noto Serif SC\'">'+ze.cn+'</span>');
+
+  // Shape
+  document.getElementById('it-shape').innerHTML = buildShape(data);
+
+  // Profiling card (G)
+  document.getElementById('it-prof').innerHTML = profCard(data);
+
+  // 13 Combos
+  document.getElementById('it-combos').innerHTML = comboTable(data);
+
+  // Elements
+  var eh = '';
+  var ekeys = ['METAL','WATER','WOOD','FIRE','EARTH'];
+  for (var ei = 0; ei < ekeys.length; ei++) {
+    var k = ekeys[ei];
+    if (data.ec[k]) {
+      var el = ELS[k];
+      eh += '<div class="eb" style="color:'+el.c+';border-color:'+el.b+'">' +
+            '<span class="l-en">'+el.en+' ×'+data.ec[k]+'</span>' +
+            '<span class="l-cn" style="font-family:\'Noto Serif SC\'">'+el.cn+' ×'+data.ec[k]+'</span></div>';
+    }
+  }
+  document.getElementById('it-elems').innerHTML = eh || '-';
+
+  // Missing
+  var mh = data.miss.length
+    ? data.miss.map(function(n){ return '<div class="mn">'+n+'</div>'; }).join('')
+    : '<span style="font-size:.82rem;color:var(--gold);font-family:\'Cinzel\',serif">None 无缺</span>';
+  document.getElementById('it-miss').innerHTML = mh;
+
+  // Character description: only show G (Main Profiling Type)
+  document.getElementById('it-descs').innerHTML = descCard(data.vG, true);
 
   applyLang();
 }
