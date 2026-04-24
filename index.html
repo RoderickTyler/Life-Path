@@ -368,16 +368,19 @@ function compute(day, mon, yr) {
   var vC = rd(tA + tB);      // Day + Month
   var vF = rd(tD + tE);      // Century + Year2
   var vG = rd(vC + vF);      // Center = Main Profiling Type
-  var vI = rd(tB + tD);      // Month + Century (bottom-left outer)
-  var vH = rd(tB + tE);      // Month + Year2  (bottom-right outer)
-  var vJ = rd(vI + vH);      // Bottom tip (used in combos but not shown)
 
-  // Bottom boxes
-  var vK = tA;  // = rd(day)
-  var vL = tB;  // = rd(month)
-  var vM = vC;
-  var vN = vI;
-  var vO = vH;
+  // Bottom outer nodes
+  var vI = rd(vF + vG);      // I = F + G  (bottom-left outer)
+  var vH = rd(vC + vG);      // H = C + G  (bottom-right outer)
+  var vJ = rd(vI + vH);      // J = I + H  (bottom tip)
+
+  // Bottom boxes: A+C=K, B+C=L, K+L=M  /  D+F=N, E+F=O, N+O=P
+  var vK = rd(tA + vC);
+  var vL = rd(tB + vC);
+  var vM = rd(vK + vL);
+  var vN = rd(tD + vF);
+  var vO = rd(tE + vF);
+  var vP = rd(vN + vO);     // P = N + O
 
   // Destined Dream
   var dest = rd(day + mon + yr2);
@@ -404,14 +407,14 @@ function compute(day, mon, yr) {
     {name:"Current Friends",           nameCn:"当前朋友",                code:"KLM", v:[vK, vL, vM]},
     {name:"Marriage Journey 1",        nameCn:"婚姻旅途 1",              code:"DFN", v:[tD, vF, vN]},
     {name:"Marriage Journey 2",        nameCn:"婚姻旅途 2",              code:"EFO", v:[tE, vF, vO]},
-    {name:"Future In-law's Health/Wealth", nameCn:"未来姻亲健康/财富",   code:"NOP", v:[vN, vO, vJ]},
+    {name:"Future In-law's Health/Wealth", nameCn:"未来姻亲健康/财富",   code:"NOP", v:[vN, vO, vP]},
     {name:"Subconscious / Hidden",     nameCn:"潜意识 / 隐藏潜力",       code:"CFG+CFG", v:[rd(vC+vC), rd(vF+vF), rd(vG+vG)]}
   ];
 
   // Element count from ALL 16 numbers:
   // A,B,D,E (top4) + C,F,G (mid3) + I,H (outer2) + J (tip1) + K,L,M,N,O,P (bottom boxes 6)
   // = 4+3+2+1+6 = 16 (dest excluded)
-  var allD = [tA, tB, tD, tE, vC, vF, vG, vI, vH, vJ, vK, vL, vM, vN, vO, vJ];
+  var allD = [tA, tB, tD, tE, vC, vF, vG, vI, vH, vJ, vK, vL, vM, vN, vO, vP];
   var ec = {};
   for (var i = 0; i < allD.length; i++) {
     var n = allD[i];
@@ -427,7 +430,7 @@ function compute(day, mon, yr) {
     day:day, mon:mon, yr:yr, cen:cen, yr2:yr2,
     tA:tA, tB:tB, tD:tD, tE:tE,
     vC:vC, vF:vF, vG:vG, vI:vI, vH:vH, vJ:vJ,
-    vK:vK, vL:vL, vM:vM, vN:vN, vO:vO,
+    vK:vK, vL:vL, vM:vM, vN:vN, vO:vO, vP:vP,
     dest:dest, zodKey:zodKey, zodElem:zodElem, numElem:numElem,
     combos:combos, ec:ec, miss:miss
   };
@@ -562,7 +565,7 @@ function buildShape(data) {
     '<div class="bbox">' +
       '<div class="bbc"><div class="bbnum">'+data.vN+'</div><div class="bblbl">N</div></div>' +
       '<div class="bbc"><div class="bbnum">'+data.vO+'</div><div class="bblbl">O</div></div>' +
-      '<div class="bbc"><div class="bbnum">'+data.vJ+'</div><div class="bblbl">P</div></div>' +
+      '<div class="bbc"><div class="bbnum">'+data.vP+'</div><div class="bblbl">P</div></div>' +
     '</div>' +
     '</div>';
 
