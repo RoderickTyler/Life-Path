@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数字密码 · Numerology Reading</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Serif+SC:wght@300;400;600&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root { --gold:#C9A84C; --gold-light:#E8CB7A; --gold-dark:#9A7A2E; --gold-glow:rgba(201,168,76,0.3); }
+[data-theme="dark"] { --bg:#0D0B07; --bg2:#151209; --card:#1C1810; --card2:#211D12; --border:rgba(201,168,76,0.22); --text:#F0E6C8; --muted:rgba(240,230,200,0.5); --line:rgba(201,168,76,0.55); }
+[data-theme="light"] { --bg:#FAF6EE; --bg2:#F0EAD6; --card:#FFFDF5; --card2:#F5F0E4; --border:rgba(154,122,46,0.28); --text:#2C2410; --muted:rgba(44,36,16,0.52); --line:rgba(154,122,46,0.65); }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Lato',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:background .3s,color .3s}
+header{background:var(--bg2);border-bottom:1px solid var(--border);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:.75rem;padding:.85rem 0}
+.logo-sym{font-size:1.6rem;filter:drop-shadow(0 0 6px var(--gold))}
+.logo-en{font-family:'Cinzel',serif;font-size:1rem;font-weight:700;color:var(--gold);letter-spacing:.12em;text-shadow:0 0 18px var(--gold-glow);display:block}
+.logo-cn{font-family:'Noto Serif SC',serif;font-size:.68rem;color:var(--muted);letter-spacing:.2em;display:block}
+.hdr-r{display:flex;align-items:center;gap:.6rem}
+.lbtn{font-family:'Cinzel',serif;font-size:.7rem;font-weight:600;letter-spacing:.1em;background:transparent;border:1px solid var(--border);color:var(--muted);padding:.3rem .65rem;border-radius:20px;cursor:pointer;transition:all .2s}
+.lbtn.on{background:var(--gold);color:#0D0B07;border-color:var(--gold)}
+.lbtn:hover:not(.on){border-color:var(--gold);color:var(--gold)}
+.tbtn2{background:transparent;border:1px solid var(--border);color:var(--text);padding:.3rem .55rem;border-radius:20px;cursor:pointer;font-size:.85rem;transition:all .2s}
+.tbtn2:hover{border-color:var(--gold)}
+.tab-bar{background:var(--bg2);border-bottom:1px solid var(--border);display:flex;overflow-x:auto;padding:0 1rem;scrollbar-width:none}
+.tab-bar::-webkit-scrollbar{display:none}
+.tbtn{font-family:'Cinzel',serif;font-size:.68rem;font-weight:600;letter-spacing:.08em;padding:.85rem 1rem;background:transparent;border:none;border-bottom:2px solid transparent;color:var(--muted);cursor:pointer;white-space:nowrap;transition:all .2s}
+.tbtn:hover{color:var(--gold)}
+.tbtn.on{color:var(--gold);border-bottom-color:var(--gold)}
+.tcn{display:block;font-family:'Noto Serif SC',serif;font-size:.58rem;letter-spacing:.15em;margin-top:.12rem;color:var(--muted);font-weight:400}
+main{max-width:920px;margin:0 auto;padding:1.75rem 1.25rem}
+.ipanel{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1.75rem;position:relative;overflow:hidden}
+.ipanel::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.ptitle{font-family:'Cinzel',serif;font-size:.75rem;font-weight:600;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;margin-bottom:1.1rem}
+.irow{display:flex;gap:.85rem;flex-wrap:wrap;align-items:flex-end}
+.ig{display:flex;flex-direction:column;gap:.35rem}
+.ig label{font-size:.65rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;font-family:'Cinzel',serif}
+.ig input,.ig select{background:var(--card2);border:1px solid var(--border);color:var(--text);padding:.5rem .75rem;border-radius:6px;font-family:'Lato',sans-serif;font-size:.9rem;transition:border-color .2s;width:86px}
+.ig input[type="date"]{width:152px}
+.ig select{width:auto;cursor:pointer}
+.ig input:focus,.ig select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 2px var(--gold-glow)}
+.cbtn{font-family:'Cinzel',serif;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;background:linear-gradient(135deg,var(--gold-dark),var(--gold),var(--gold-light));color:#0D0B07;border:none;padding:.55rem 1.5rem;border-radius:6px;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px var(--gold-glow);align-self:flex-end}
+.cbtn:hover{transform:translateY(-1px);box-shadow:0 4px 20px var(--gold-glow)}
+.slbl{font-family:'Cinzel',serif;font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:1.5rem 0 1rem;display:flex;align-items:center;gap:.5rem}
+.slbl::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
+.igrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.85rem;margin-bottom:1.25rem}
+.ic{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.9rem 1.1rem;position:relative;overflow:hidden}
+.ic::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--gold),transparent)}
+.ic-l{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;margin-bottom:.35rem}
+.ic-v{font-family:'Cinzel',serif;font-size:1.45rem;font-weight:700;color:var(--gold);text-shadow:0 0 10px var(--gold-glow)}
+.ic-s{font-size:.72rem;color:var(--muted);margin-top:.15rem;font-family:'Noto Serif SC',serif}
+.res{display:none}
+.res.on{display:block;animation:fadeUp .4s ease}
+.empty-s{text-align:center;padding:3rem 1rem;color:var(--muted)}
+.empty-s .ei{font-size:2.8rem;margin-bottom:.75rem;opacity:.35}
+.empty-s p{font-family:'Cinzel',serif;font-size:.78rem;letter-spacing:.15em}
+/* SHAPE */
+.shape-wrap{display:flex;justify-content:center;margin:1rem 0 1.5rem}
+.hourglass{width:100%;max-width:600px}
+.top-inputs{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:.6rem;padding:0 .5rem;flex-wrap:wrap;gap:.5rem}
+.ibg{display:flex;flex-direction:column;align-items:center;gap:.25rem}
+.ibox{min-width:54px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--gold);color:#0D0B07;font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;border-radius:6px;border:2px solid var(--gold-light);letter-spacing:.05em;padding:0 .5rem}
+.ibox-lbl{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.15em;color:var(--muted);text-transform:uppercase}
+.dest-wrap{display:flex;flex-direction:column;align-items:center;gap:.25rem}
+.dest-circ{width:56px;height:56px;border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:1.5rem;font-weight:700;color:var(--gold);text-shadow:0 0 12px var(--gold-glow);background:var(--card2);box-shadow:0 0 16px var(--gold-glow)}
+.dest-lbl{font-family:'Cinzel',serif;font-size:.55rem;letter-spacing:.1em;color:var(--muted);text-align:center}
+.svg-wrap{width:100%}
+.svg-wrap svg{width:100%;height:auto;overflow:visible}
+.bboxes{display:flex;justify-content:space-between;margin-top:1rem;padding:0 .25rem;gap:.5rem}
+.bbox{display:flex;gap:.4rem}
+.bbc{display:flex;flex-direction:column;align-items:center;gap:.2rem}
+.bbnum{width:48px;height:44px;display:flex;align-items:center;justify-content:center;background:var(--card2);border:1px solid var(--border);border-radius:5px;font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;color:var(--gold)}
+.bblbl{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.1em;color:var(--muted)}
+/* CARDS */
+.dc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.4rem;margin-bottom:.85rem;position:relative;overflow:hidden}
+.dc::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.dc-t{font-family:'Cinzel',serif;font-size:.95rem;font-weight:700;color:var(--gold);margin-bottom:.5rem;letter-spacing:.08em}
+.dc-en{font-size:.84rem;line-height:1.8;color:var(--text)}
+.dc-cn{font-family:'Noto Serif SC',serif;font-size:.8rem;line-height:1.95;color:var(--muted);margin-top:.65rem;padding-top:.65rem;border-top:1px solid var(--border)}
+.cyc-d{display:flex;align-items:center;gap:1.75rem;flex-wrap:wrap;margin:1.25rem 0 1rem}
+.cyc-n{width:90px;height:90px;display:flex;align-items:center;justify-content:center;border:2px solid var(--gold);border-radius:12px;font-family:'Cinzel',serif;font-size:2.8rem;font-weight:700;color:var(--gold);text-shadow:0 0 18px var(--gold-glow);box-shadow:0 0 18px var(--gold-glow),inset 0 0 18px rgba(201,168,76,.07);background:var(--card);flex-shrink:0}
+.cyc-i{flex:1;min-width:180px}
+.cyc-il{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.2em;color:var(--muted);margin-bottom:.3rem}
+.cyc-iv{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:600;color:var(--gold);margin-bottom:.6rem}
+.nxt{font-size:.73rem;color:var(--muted);font-family:'Cinzel',serif;display:flex;align-items:center;gap:.4rem}
+.nxt-n{font-size:.95rem;color:var(--gold-dark);font-weight:700}
+.er{display:flex;gap:.45rem;flex-wrap:wrap;margin:.75rem 0}
+.eb{padding:.3rem .7rem;border-radius:20px;font-size:.72rem;font-family:'Cinzel',serif;border:1px solid;background:var(--card2);letter-spacing:.04em}
+.mr{display:flex;gap:.4rem;flex-wrap:wrap;margin:.5rem 0 1rem}
+.mn{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border:1px dashed rgba(201,168,76,.3);border-radius:4px;font-family:'Cinzel',serif;font-size:.95rem;color:var(--muted);background:var(--card2)}
+.orn{text-align:center;margin:1.25rem 0;color:var(--gold);opacity:.35;font-size:.85rem;letter-spacing:.5em}
+.tab-panel{display:none}
+.tab-panel.on{display:block}
+.l-en,.l-cn{transition:opacity .15s}
+body.lcn .l-en{display:none!important}
+body.len .l-cn{display:none!important}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:560px){.ibox{min-width:44px;font-size:.95rem}.top-inputs{justify-content:center}}
+
+/* PROFILING CARD */
+.profiling-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1rem;position:relative;overflow:hidden}
+.profiling-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.prof-top{display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+.prof-num{width:72px;height:72px;display:flex;align-items:center;justify-content:center;border:2px solid var(--gold);border-radius:10px;font-family:'Cinzel',serif;font-size:2.4rem;font-weight:700;color:var(--gold);text-shadow:0 0 16px var(--gold-glow);background:var(--card2);flex-shrink:0;box-shadow:0 0 16px var(--gold-glow)}
+.prof-elem{font-family:'Noto Serif SC',serif;font-size:2.8rem;font-weight:600;line-height:1;text-shadow:0 0 20px currentColor}
+.prof-elem-row{display:flex;align-items:center;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem}
+/* COMBO TABLE */
+.combo-wrap{overflow-x:auto;margin:.5rem 0 1rem}
+.combo-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.combo-table th{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.15em;color:var(--gold);text-transform:uppercase;padding:.6rem .75rem;border-bottom:1px solid var(--border);text-align:left;white-space:nowrap}
+.combo-table td{padding:.6rem .75rem;border-bottom:1px solid rgba(201,168,76,.1);vertical-align:middle}
+.combo-table tr:hover td{background:rgba(201,168,76,.05)}
+.combo-idx{font-family:'Cinzel',serif;font-size:.75rem;color:var(--muted);width:28px;text-align:center}
+.combo-name{font-size:.8rem;color:var(--text)}
+.combo-code{font-family:'Cinzel',serif;font-size:.78rem;color:var(--muted);letter-spacing:.08em;white-space:nowrap}
+.combo-nums{font-family:'Cinzel',serif;font-size:1rem;font-weight:700;color:var(--gold);letter-spacing:.12em;white-space:nowrap}
+</style>
+</head>
+<body data-theme="dark">
+
+<header>
+  <div class="logo">
+    <span class="logo-sym">☯</span>
+    <div><span class="logo-en">NUMEROLOGY</span><span class="logo-cn">数字密码 · 命理解读</span></div>
+  </div>
+  <div class="hdr-r">
+    <button class="lbtn on" id="btn-en" onclick="setLang('en')">EN</button>
+    <button class="lbtn" id="btn-cn" onclick="setLang('cn')">中文</button>
+    <button class="tbtn2" id="thm" onclick="toggleTheme()">🌙</button>
+  </div>
+</header>
+
+<nav class="tab-bar">
+  <button class="tbtn on" id="tab-it" onclick="showTab('it')">Inverted Triangle<span class="tcn">七魄逆三角</span></button>
+  <button class="tbtn" id="tab-ycit" onclick="showTab('ycit')">Year Cycle (IT)<span class="tcn">流年·七魄</span></button>
+  <button class="tbtn" id="tab-yc" onclick="showTab('yc')">Year Cycle<span class="tcn">流年周期</span></button>
+  <button class="tbtn" id="tab-mc" onclick="showTab('mc')">Month Cycle<span class="tcn">月份周期</span></button>
+  <button class="tbtn" id="tab-dc" onclick="showTab('dc')">Day Cycle<span class="tcn">日期周期</span></button>
+</nav>
+
+<main>
+
+<!-- INVERTED TRIANGLE -->
+<div class="tab-panel on" id="panel-it">
+  <div class="ipanel">
+    <div class="ptitle l-en">Birth Date · Seven Souls Calculator</div>
+    <div class="ptitle l-cn" style="font-family:'Noto Serif SC'">出生日期 · 七魄计算</div>
+    <div class="irow">
+      <div class="ig"><label><span class="l-en">Day (DD)</span><span class="l-cn">日</span></label><input type="number" id="it-d" min="1" max="31" value="08"></div>
+      <div class="ig"><label><span class="l-en">Month (MM)</span><span class="l-cn">月</span></label><input type="number" id="it-m" min="1" max="12" value="10"></div>
+      <div class="ig"><label><span class="l-en">Year (YYYY)</span><span class="l-cn">年</span></label><input type="number" id="it-y" min="1900" max="2099" value="1990"></div>
+      <button class="cbtn" onclick="doIT()"><span class="l-en">Calculate</span><span class="l-cn">计算</span></button>
+    </div>
+  </div>
+  <div class="empty-s" id="it-emp"><div class="ei">🔯</div><p class="l-en">Enter your birth date above</p><p class="l-cn" style="font-family:'Noto Serif SC'">输入出生日期以查询七魄</p></div>
+  <div class="res" id="it-res">
+    <div class="igrid" id="it-cards"></div>
+    <div class="slbl"><span class="l-en">Seven Souls · Hourglass Shape</span><span class="l-cn">七魄 · 形状图</span></div>
+    <div class="shape-wrap"><div class="hourglass" id="it-shape"></div></div>
+    <div class="slbl"><span class="l-en">Main Profiling Type · G</span><span class="l-cn">主性格类型 · G</span></div>
+    <div id="it-profiling"></div>
+    <div class="slbl"><span class="l-en">13 Number Combinations</span><span class="l-cn">13个数字组合</span></div>
+    <div id="it-combos"></div>
+    <div class="slbl"><span class="l-en">Five Elements</span><span class="l-cn">五行分析</span></div>
+    <div class="er" id="it-elems"></div>
+    <div class="slbl"><span class="l-en">Missing Numbers</span><span class="l-cn">缺少的数字</span></div>
+    <div class="mr" id="it-miss"></div>
+    <div class="orn">— ✦ —</div>
+    <div class="slbl"><span class="l-en">Destined Dream · Character Analysis</span><span class="l-cn">命定数字 · 性格分析</span></div>
+    <div id="it-descs"></div>
+  </div>
+</div>
+
+<!-- YEAR CYCLE IT -->
+<div class="tab-panel" id="panel-ycit">
+  <div class="ipanel">
+    <div class="ptitle l-en">Year Cycle · IT Method</div>
+    <div class="ptitle l-cn" style="font-family:'Noto Serif SC'">流年周期 · 七魄法</div>
+    <div class="irow">
+      <div class="ig"><label><span class="l-en">Day</span><span class="l-cn">日</span></label><input type="number" id="ycit-d" min="1" max="31" value="08"></div>
+      <div class="ig"><label><span class="l-en">Month</span><span class="l-cn">月</span></label><input type="number" id="ycit-m" min="1" max="12" value="10"></div>
+      <div class="ig"><label><span class="l-en">Year</span><span class="l-cn">年</span></label><input type="number" id="ycit-y" min="1900" max="2099" value="1990"></div>
+      <div class="ig"><label><span class="l-en">Reading Year</span><span class="l-cn">查询年份</span></label><input type="number" id="ycit-ty" min="1900" max="2099" value="2025"></div>
+      <button class="cbtn" onclick="doYCIT()"><span class="l-en">Calculate</span><span class="l-cn">计算</span></button>
+    </div>
+  </div>
+  <div class="empty-s" id="ycit-emp"><div class="ei">📅</div><p class="l-en">Enter birth date and year to read</p><p class="l-cn" style="font-family:'Noto Serif SC'">输入出生日期和查询年份</p></div>
+  <div class="res" id="ycit-res"></div>
+</div>
+
+<!-- YEAR CYCLE -->
+<div class="tab-panel" id="panel-yc">
+  <div class="ipanel">
+    <div class="ptitle l-en">Year Cycle Reading</div>
+    <div class="ptitle l-cn" style="font-family:'Noto Serif SC'">流年周期解读</div>
+    <div class="irow">
+      <div class="ig"><label><span class="l-en">Day</span><span class="l-cn">日</span></label><input type="number" id="yc-d" min="1" max="31" value="11"></div>
+      <div class="ig"><label><span class="l-en">Month</span><span class="l-cn">月</span></label><input type="number" id="yc-m" min="1" max="12" value="02"></div>
+      <div class="ig"><label><span class="l-en">Year</span><span class="l-cn">年</span></label><input type="number" id="yc-y" min="1900" max="2099" value="1991"></div>
+      <div class="ig"><label><span class="l-en">Reading Year</span><span class="l-cn">查询年份</span></label><input type="number" id="yc-ty" min="1900" max="2099" value="2025"></div>
+      <button class="cbtn" onclick="doYC()"><span class="l-en">Calculate</span><span class="l-cn">计算</span></button>
+    </div>
+  </div>
+  <div class="empty-s" id="yc-emp"><div class="ei">🌀</div><p class="l-en">Enter birth date and the year to read</p><p class="l-cn" style="font-family:'Noto Serif SC'">输入出生日期及查询年份</p></div>
+  <div class="res" id="yc-res"></div>
+</div>
+
+<!-- MONTH CYCLE -->
+<div class="tab-panel" id="panel-mc">
+  <div class="ipanel">
+    <div class="ptitle l-en">Month Cycle Reading</div>
+    <div class="ptitle l-cn" style="font-family:'Noto Serif SC'">月份周期解读</div>
+    <div class="irow">
+      <div class="ig"><label><span class="l-en">Birth Day</span><span class="l-cn">出生日</span></label><input type="number" id="mc-d" min="1" max="31" value="11"></div>
+      <div class="ig"><label><span class="l-en">Birth Month</span><span class="l-cn">出生月</span></label><input type="number" id="mc-m" min="1" max="12" value="02"></div>
+      <div class="ig"><label><span class="l-en">Birth Year</span><span class="l-cn">出生年</span></label><input type="number" id="mc-y" min="1900" max="2099" value="1991"></div>
+      <div class="ig"><label><span class="l-en">Cycle Year</span><span class="l-cn">流年</span></label><input type="number" id="mc-cy" min="1900" max="2099" value="2025"></div>
+      <div class="ig"><label><span class="l-en">Month</span><span class="l-cn">月份</span></label>
+        <select id="mc-tm"><option value="1">January 一月</option><option value="2">February 二月</option><option value="3">March 三月</option><option value="4">April 四月</option><option value="5">May 五月</option><option value="6">June 六月</option><option value="7">July 七月</option><option value="8">August 八月</option><option value="9">September 九月</option><option value="10">October 十月</option><option value="11">November 十一月</option><option value="12">December 十二月</option></select>
+      </div>
+      <button class="cbtn" onclick="doMC()"><span class="l-en">Calculate</span><span class="l-cn">计算</span></button>
+    </div>
+  </div>
+  <div class="empty-s" id="mc-emp"><div class="ei">🌙</div><p class="l-en">Enter birth date, year and month to read</p><p class="l-cn" style="font-family:'Noto Serif SC'">输入出生日期及查询年月</p></div>
+  <div class="res" id="mc-res"></div>
+</div>
+
+<!-- DAY CYCLE -->
+<div class="tab-panel" id="panel-dc">
+  <div class="ipanel">
+    <div class="ptitle l-en">Day Cycle Reading</div>
+    <div class="ptitle l-cn" style="font-family:'Noto Serif SC'">日期周期解读</div>
+    <div class="irow">
+      <div class="ig"><label><span class="l-en">Birth Day</span><span class="l-cn">出生日</span></label><input type="number" id="dc-d" min="1" max="31" value="11"></div>
+      <div class="ig"><label><span class="l-en">Birth Month</span><span class="l-cn">出生月</span></label><input type="number" id="dc-m" min="1" max="12" value="02"></div>
+      <div class="ig"><label><span class="l-en">Birth Year</span><span class="l-cn">出生年</span></label><input type="number" id="dc-y" min="1900" max="2099" value="1991"></div>
+      <div class="ig"><label><span class="l-en">Reading Date</span><span class="l-cn">查询日期</span></label><input type="date" id="dc-td" value="2025-04-24"></div>
+      <button class="cbtn" onclick="doDC()"><span class="l-en">Calculate</span><span class="l-cn">计算</span></button>
+    </div>
+  </div>
+  <div class="empty-s" id="dc-emp"><div class="ei">☀️</div><p class="l-en">Enter birth date and the day to read</p><p class="l-cn" style="font-family:'Noto Serif SC'">输入出生日期及查询日期</p></div>
+  <div class="res" id="dc-res"></div>
+</div>
+
+</main>
+<script>
+const CHAR_EN={1:`'1' is a master of wisdom — strong analytical power, great creativity, very detail-oriented. A born leader with strong authority and a spirit of righteousness. Wealth typically arrives between ages 34–42. Attracts much attention from the opposite sex.`,2:`Skillful and pleasant personality. Calm, friendly, and hardworking with matured thoughts. Naturally good at public relations. Achievement in life comes after age 45. Can attract criticism and be very stubborn at times.`,3:`Active and forward-looking. Focused on what they want, talented in many areas. Thrives in society before age 30. Negative side: aggressiveness, impatience, and a quick but short temper. Speech can be direct and blunt.`,4:`A learned individual — artistic, excels in exams, compassionate and charismatic. Outgoing, loves to travel, and gets back up quickly after failure. Tends to be weak in accumulating wealth and must be cautious in relationships.`,5:`A very strong character with born leadership and charisma. Highly instinctive, hardworking, and realistic. Achieves success in later life. The stubborn side must relax, stop being picky on small matters, and listen to others.`,6:`A survival number that controls wealth and prosperity. Well-mannered with refined tastes. Excels in education, arts, or religion. Can become a popular public figure. Pride and not listening to superiors are the weak points. Luck peaks after age 45.`,7:`Highly skillful and detail-oriented. Never forgets those who helped. Full of passion and love. However, argumentative and loves fame and fortune. Fickle-minded and faces challenges in marriage.`,8:`Quiet and conservative outwardly, but lively among friends. Deeply responsible and righteous. A trustworthy person. Being overly careful and rigid in perspective can result in missed opportunities.`,9:`Optimistic and open-minded. Loves to look nice. Intelligent, alert, and sensitive. Knows when and how to handle situations. Works fast but lacks in detail. Emotional. Luck peaks in middle age, around 35 and above.`};
+const CHAR_CN={1:`1号人正面：代表独立，自信。负面：自负，自我。代表人物是亚当，是阳性数字，代表男性能量。智商高，情商低。建议：活在自己的领域，活出自信，要放下自己，多听别人说。`,2:`2号人是女性能量，代表人物是夏娃。正面：沟通、交流、口才、合作、温柔。负面：犹豫不决，难以下决定。适合以口为业，如讲师、律师。`,3:`1生2，2生3，3生万物。正面是行动力、快速，也是灵性能量。负面：冲动、急脾气。自己喜欢的事学得很快，但很快会失去兴趣。建议：珍惜当下，学会坚持真正喜欢的事。`,4:`4号人正面：学习力、计划、稳定、做事条理。负面：保守、直接、死板。有4的人投资脖子以上（知识、技能）。建议：世界唯一不变的就是变，要完善内心深处的不安全感。`,5:`5号人正面：方向感、目标、幽默，喜欢多姿多彩的生活，爱旅游，不受约束。负面：固执，听不进别人意见，撞了南墙也不回头。建议：放下小自由才会有大自由。`,6:`六号人正面：远见、财富、智慧、追求完美。负面：浪费。七魄中有6的人一生不太缺钱，有6的人有价值感。没6的人容易缺自信，不舍得为自己花钱。`,7:`七号人正面：贵人、博学、人脉，幸运，学习力强。负面：慢、拖延、冷漠。有7的人圈子能聚到一块儿，7号人的脸上写着欢迎光临。`,8:`八号人正面：责任、野心、权利。负面：压力、忙碌、欲望。8是大火，代表大脾气要面子。很多8号人是大企业家，有很强的责任感和使命感。建议：不要对最亲近的人发脾气。`,9:`9号人正面：成功、机会、洞察力。负面：贪心、消极、没有原则。学东西快，身边机会多，有生意头脑。天马行空，学习力强。有9的人天生机会多，没9的人不太适合做生意。`};
+const CYC_EN={1:`A year of new beginnings. The right moves now can build a lifetime's wealth over nine years. Explore new markets, be humble and collaborate. Avoid going solo or being emotional. Watch for injuries and accidents.`,2:`A year of communication and collaboration. Opportunities and helpful people come easily. Be tolerant and generous. Avoid talking too much without action — this can cause legal troubles. Make decisions promptly. Beware of marriage challenges.`,3:`A low-luck year. Anxiety and constant opportunity-hunting only creates more chaos. Avoid investments — risk of fraud is high. Control emotions, stay grounded, and protect your health.`,4:`A year for learning, planning, and building a solid foundation. Overthinking causes stress and poor sleep. Be mindful of liver and gallbladder health. Stay steady and expect modest gains.`,5:`A pivotal turning point. Navigate well and four years of good fortune follow. Be bold, but avoid stubbornness — ignoring advice leads to serious obstacles and possibly having to start over.`,6:`A year of wealth. Seize this opportunity for significant income growth — or wait nine more years. Give back and share your achievements. Avoid greed and poor financial management.`,7:`A year of connections. Many helpful people surround you. Do not exploit relationships for personal gain. A good year for marriage, but beware of distractions. Expect sudden and unexpected events.`,8:`A year of abundance, power, and achievement. Practice gratitude. Can also be a year of intense pressure and emotional extremes. Avoid investments. Pay close attention to your health.`,9:`A year of results. Without a strong foundation from prior years, success is difficult. Important decisions await in career and marriage. Manage ambition carefully and prepare for the next nine-year cycle.`};
+const CYC_CN={1:`开始的一年。如果走对，可在九年内赚到一辈子的钱。今年的选择影响未来九年。开拓新市场，谦虚合作，避免单打独斗和情绪化。小心受伤或意外事故。`,2:`沟通、合作，容易吸引机会和贵人。不要太计较小事，学会宽容大度。话多不行动会带来麻烦，甚至法律问题。做决定要果断，认错方向要及时调整。当心婚姻问题。`,3:`运气低的一年，焦虑和不断寻找机会反而让自己更忙。避免投资，容易被骗。控制情绪，踏实沉淀，注意身体健康。`,4:`学习、规划、建立稳定基础之年。过度思考会使事情复杂化，影响睡眠，严重可致抑郁。注意肝胆健康。踏实进取，可有小收获。`,5:`方向与决心之年，是重要转折点。机会很多，导航好就有四年好运。大胆冒险，但固执和不听劝告会带来重重障碍，甚至要从头再来。`,6:`财富之年。抓住机会将大幅增加收入，错过就再等九年。回馈他人，分享成就。避免贪心和理财不善，否则财富来去匆匆，还招来小人。`,7:`人脉之年。人际关系好，贵人多。不要利用这些关系谋私利，否则贵人变小人。适合结婚，但要小心桃花。充满变数，突发事件多。`,8:`丰收、权力与成就之年。要感恩和回馈。也可能是压力巨大、情绪极端的一年。避免投资。特别注意健康，有患重病的风险。`,9:`结果之年。前几年基础不好，成功很难。事业和婚姻都要做重要决定。调整心态，准备进入下一个九年周期。注意肝胆健康。`};
+const CYC_T_EN={1:'New Beginnings',2:'Cooperation',3:'Expression',4:'Foundation',5:'Change',6:'Harmony & Wealth',7:'Connections',8:'Power',9:'Completion'};
+const CYC_T_CN={1:'新开始',2:'合作',3:'表达',4:'奠基',5:'变化',6:'财富与和谐',7:'人脉',8:'力量',9:'完成'};
+const NE={1:'WATER',2:'WATER',3:'WOOD',4:'WOOD',5:'EARTH',6:'METAL',7:'METAL',8:'EARTH',9:'FIRE'};
+const ELS={METAL:{en:'Metal',cn:'金',c:'#C0C0C8',b:'#A0A0A8'},WATER:{en:'Water',cn:'水',c:'#7AB8D8',b:'#5A98B8'},WOOD:{en:'Wood',cn:'木',c:'#80C080',b:'#60A060'},FIRE:{en:'Fire',cn:'火',c:'#E08060',b:'#C06040'},EARTH:{en:'Earth',cn:'土',c:'#C0A860',b:'#A08840'}};
+const ZBY12=['MONKEY','ROOSTER','DOG','BOAR','RAT','OX','TIGER','RABBIT','DRAGON','SNAKE','HORSE','GOAT'];
+const ZD={RAT:{en:'Rat',cn:'鼠',e:'🐭'},OX:{en:'Ox',cn:'牛',e:'🐂'},TIGER:{en:'Tiger',cn:'虎',e:'🐯'},RABBIT:{en:'Rabbit',cn:'兔',e:'🐰'},DRAGON:{en:'Dragon',cn:'龙',e:'🐲'},SNAKE:{en:'Snake',cn:'蛇',e:'🐍'},HORSE:{en:'Horse',cn:'马',e:'🐴'},GOAT:{en:'Goat',cn:'羊',e:'🐑'},MONKEY:{en:'Monkey',cn:'猴',e:'🐵'},ROOSTER:{en:'Rooster',cn:'鸡',e:'🐓'},DOG:{en:'Dog',cn:'狗',e:'🐶'},BOAR:{en:'Boar',cn:'猪',e:'🐷'}};
+
+function rd(n){n=Math.abs(Math.round(n));while(n>9){n=String(n).split('').reduce((s,d)=>s+parseInt(d),0)}return n}
+
+function compute(d,m,y){
+  d=parseInt(d);m=parseInt(m);y=parseInt(y);
+  if(!d||!m||!y||y<1900)return null;
+  const cen=Math.floor(y/100),yr2=y%100;
+
+  // Top 4 values (each input reduced to single digit)
+  const A=rd(d), B=rd(m), D=rd(cen), E=rd(yr2);
+
+  // Shape computed values
+  const C=rd(A+B);    // Day + Month
+  const F=rd(D+E);    // Century + Year2
+  const G=rd(C+F);    // Center / Main Profiling Type
+  const I=rd(B+D);    // Month + Century (bottom-left)
+  const H=rd(B+E);    // Month + Year2  (bottom-right)
+  const J=rd(I+H);    // Bottom tip (hidden from card)
+
+  // Bottom boxes
+  const K=A, L=B, M=C;
+  const N=I, O=H, P=J;
+
+  const dest=rd(d+m+yr2);  // Destined Dream
+
+  // Zodiac year element: last digit of year -> element
+  const ZELEM_MAP={0:'METAL',1:'METAL',2:'WATER',3:'WATER',4:'WOOD',5:'WOOD',6:'FIRE',7:'FIRE',8:'EARTH',9:'EARTH'};
+  const zodiacElem = ZELEM_MAP[y%10];
+
+  // Zodiac animal
+  const zk=ZBY12[y%12];
+
+  // 13 Combinations
+  const combos=[
+    {name:'Father Gene / Career',       nameCn:'父亲基因 / 事业',     code:'ABC', vals:[A,B,C]},
+    {name:'Mother Gene / Marriage',     nameCn:'母亲基因 / 婚姻',     code:'DEF', vals:[D,E,F]},
+    {name:'Main Character / Self',      nameCn:'主性格 / 自身',       code:'CFG', vals:[C,F,G]},
+    {name:"Life's Journey 1",           nameCn:'人生旅途 1',          code:'CGH', vals:[C,G,H]},
+    {name:"Life's Journey 2",           nameCn:'人生旅途 2',          code:'FGI', vals:[F,G,I]},
+    {name:'Children / Subordinate',     nameCn:'子女 / 下属',         code:'IHJ', vals:[I,H,J]},
+    {name:'Career Journey 1',           nameCn:'事业旅途 1',          code:'ACK', vals:[A,C,K]},
+    {name:'Career Journey 2',           nameCn:'事业旅途 2',          code:'BCL', vals:[B,C,L]},
+    {name:'Current Friends',            nameCn:'当前朋友',            code:'KLM', vals:[K,L,M]},
+    {name:'Marriage Journey 1',         nameCn:'婚姻旅途 1',          code:'DFN', vals:[D,F,N]},
+    {name:'Marriage Journey 2',         nameCn:'婚姻旅途 2',          code:'EFO', vals:[E,F,O]},
+    {name:"Future In-law's Health/Wealth", nameCn:'未来姻亲健康/财富', code:'NOP', vals:[N,O,P]},
+    {name:'Subconscious / Hidden Potential', nameCn:'潜意识 / 隐藏潜力', code:'CFG+CFG', vals:[rd(C+C),rd(F+F),rd(G+G)]},
+  ];
+
+  // All digits for missing/elements (use the 4 top values + all computed)
+  const allDigits=[A,B,D,E,C,F,G,I,H,J];
+  const pres=new Set([A,B,D,E].filter(x=>x>0));
+  const miss=[1,2,3,4,5,6,7,8,9].filter(n=>!pres.has(n));
+  const ec={};
+  allDigits.forEach(n=>{if(n>=1&&n<=9){const e=NE[n];ec[e]=(ec[e]||0)+1}});
+
+  return{d,m,y,cen,yr2,A,B,D,E,C,F,G,I,H,J,K,L,M,N,O,P,dest,zk,zodiacElem,miss,ec,combos};
+}
+
+function buildShape(data){
+  const dark=document.body.dataset.theme==='dark';
+  const gold='#C9A84C',muted=dark?'rgba(240,230,200,0.5)':'rgba(44,36,16,0.5)';
+  const cb=dark?'#211D12':'#F5F0E4',lc=dark?'rgba(201,168,76,0.55)':'rgba(154,122,46,0.65)';
+  const {d,m,cen,yr2,A,B,D,E,C,F,G,I,H,J,dest}=data;
+
+  // 4 top circles: rd(day), rd(month), rd(century), rd(year2)
+  const topVals=[A,B,D,E]; // Already reduced: rd(day), rd(month), rd(century), rd(year2)
+  const topLbls=['A','B','D','E'];
+  const tx=[100,213,347,460],ty2=72;
+  // Shape nodes
+  const A=[100,72],E=[460,72];
+  const Cp=[145,182],Fp=[415,182],Gp=[280,182];
+  const Ip=[100,275],Hp=[460,275],Jp=[280,318];
+
+  function starPoly(cx,cy,r){
+    const pts=[];
+    for(let i=0;i<10;i++){const a=(i*Math.PI/5)-Math.PI/2,ra=i%2===0?r:r*.42;pts.push(`${cx+Math.cos(a)*ra},${cy+Math.sin(a)*ra}`)}
+    return`<polygon points="${pts.join(' ')}" fill="${gold}"/>`;
+  }
+  function node(x,y,v,r=22){
+    return`<circle cx="${x}" cy="${y}" r="${r}" fill="${cb}" stroke="${gold}" stroke-width="1.5"/>
+    <text x="${x}" y="${y}" font-family="Cinzel,serif" font-size="14" font-weight="700" fill="${gold}" text-anchor="middle" dominant-baseline="central">${v}</text>`;
+  }
+
+  let s=`<svg viewBox="0 0 560 360" xmlns="http://www.w3.org/2000/svg">
+  <defs><radialGradient id="gg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="${gold}" stop-opacity=".18"/><stop offset="100%" stop-color="${gold}" stop-opacity="0"/></radialGradient></defs>
+  <circle cx="280" cy="182" r="60" fill="url(#gg)"/>
+  <!-- TOP OUTER LINE -->
+  <line x1="${A[0]}" y1="${A[1]}" x2="${E[0]}" y2="${E[1]}" stroke="${lc}" stroke-width="1.5"/>
+  <!-- LEFT X: A→C→G and A→G(direct dashed) -->
+  <line x1="${A[0]}" y1="${A[1]}" x2="${Cp[0]}" y2="${Cp[1]}" stroke="${lc}" stroke-width="1.5"/>
+  <line x1="${Cp[0]}" y1="${Cp[1]}" x2="${Gp[0]}" y2="${Gp[1]}" stroke="${lc}" stroke-width="1.5"/>
+  <!-- RIGHT X: E→F→G -->
+  <line x1="${E[0]}" y1="${E[1]}" x2="${Fp[0]}" y2="${Fp[1]}" stroke="${lc}" stroke-width="1.5"/>
+  <line x1="${Fp[0]}" y1="${Fp[1]}" x2="${Gp[0]}" y2="${Gp[1]}" stroke="${lc}" stroke-width="1.5"/>
+  <!-- Cross diagonals (dashed) -->
+  <line x1="${A[0]}" y1="${A[1]}" x2="${Fp[0]}" y2="${Fp[1]}" stroke="${lc}" stroke-width="1" stroke-dasharray="4,4" opacity=".5"/>
+  <line x1="${E[0]}" y1="${E[1]}" x2="${Cp[0]}" y2="${Cp[1]}" stroke="${lc}" stroke-width="1" stroke-dasharray="4,4" opacity=".5"/>
+  <!-- BOTTOM TRIANGLE: G→I, G→H, I→J, H→J -->
+  <line x1="${Gp[0]}" y1="${Gp[1]}" x2="${Ip[0]}" y2="${Ip[1]}" stroke="${lc}" stroke-width="1.5"/>
+  <line x1="${Gp[0]}" y1="${Gp[1]}" x2="${Hp[0]}" y2="${Hp[1]}" stroke="${lc}" stroke-width="1.5"/>
+  <line x1="${Ip[0]}" y1="${Ip[1]}" x2="${Jp[0]}" y2="${Jp[1]}" stroke="${lc}" stroke-width="1.5"/>
+  <line x1="${Hp[0]}" y1="${Hp[1]}" x2="${Jp[0]}" y2="${Jp[1]}" stroke="${lc}" stroke-width="1.5"/>`;
+
+  // Top 4 circles: one per input (day, month, century, year2) — each reduced to single digit
+  for(let i=0;i<4;i++){
+    const x=tx[i],v=topVals[i],lbl=topLbls[i];
+    const isAE=(i===0||i===3);
+    s+=`<circle cx="${x}" cy="${ty2}" r="22" fill="${cb}" stroke="${gold}" stroke-width="${isAE?'2':'1.5'}"/>`;
+    s+=`<text x="${x}" y="${ty2}" font-family="Cinzel,serif" font-size="15" font-weight="700" fill="${gold}" text-anchor="middle" dominant-baseline="central">${v}</text>`;
+    if(isAE){ s+=starPoly(x,ty2+30,6); }
+    else{ s+=`<text x="${x}" y="${ty2+32}" font-family="Cinzel,serif" font-size="9" fill="${muted}" text-anchor="middle">${lbl}</text>`; }
+  }
+
+  // C and F nodes
+  s+=node(Cp[0],Cp[1],C);
+  s+=`<text x="${Cp[0]}" y="${Cp[1]+30}" font-family="Cinzel,serif" font-size="9" fill="${muted}" text-anchor="middle">C</text>`;
+  s+=node(Fp[0],Fp[1],F);
+  s+=`<text x="${Fp[0]}" y="${Fp[1]+30}" font-family="Cinzel,serif" font-size="9" fill="${muted}" text-anchor="middle">F</text>`;
+
+  // G center with star marker below
+  s+=`<circle cx="${Gp[0]}" cy="${Gp[1]}" r="27" fill="${cb}" stroke="${gold}" stroke-width="2"/>`;
+  s+=`<text x="${Gp[0]}" y="${Gp[1]}" font-family="Cinzel,serif" font-size="16" font-weight="700" fill="${gold}" text-anchor="middle" dominant-baseline="central">${G}</text>`;
+  s+=starPoly(Gp[0],Gp[1]+34,9);
+  s+=`<text x="${Gp[0]}" y="${Gp[1]+50}" font-family="Cinzel,serif" font-size="9" fill="${muted}" text-anchor="middle">G</text>`;
+
+  // I and H nodes
+  s+=node(Ip[0],Ip[1],I);
+  s+=`<text x="${Ip[0]}" y="${Ip[1]+28}" font-family="Cinzel,serif" font-size="9" fill="${muted}" text-anchor="middle">I</text>`;
+  s+=node(Hp[0],Hp[1],H);
+  s+=`<text x="${Hp[0]}" y="${Hp[1]+28}" font-family="Cinzel,serif" font-size="9" fill="${muted}" text-anchor="middle">H</text>`;
+
+  // J bottom tip: lines converge here but no circle displayed
+
+  s+=`</svg>`;
+
+  const fmt2=v=>String(v).padStart(2,'0');
+  const topIn=`<div class="top-inputs">
+    <div class="ibg"><div class="ibox">${fmt2(d)}</div><div class="ibox-lbl l-en">Date</div><div class="ibox-lbl l-cn">日</div></div>
+    <div class="ibg"><div class="ibox">${fmt2(m)}</div><div class="ibox-lbl l-en">Month</div><div class="ibox-lbl l-cn">月</div></div>
+    <div class="dest-wrap"><div class="dest-circ">${dest}</div><div class="dest-lbl l-en">Destined Dream</div><div class="dest-lbl l-cn" style="font-family:'Noto Serif SC'">命定数字</div></div>
+    <div class="ibg"><div class="ibox">${fmt2(cen)}</div><div class="ibox-lbl l-en">Century</div><div class="ibox-lbl l-cn">世纪</div></div>
+    <div class="ibg"><div class="ibox">${fmt2(yr2)}</div><div class="ibox-lbl l-en">Year</div><div class="ibox-lbl l-cn">年</div></div>
+  </div>`;
+
+  // Bottom boxes from data (P/J removed per display preference)
+  const {K,L,M,N,O}=data;
+  const bboxes=`<div class="bboxes">
+    <div class="bbox">${[{v:M,l:'M'},{v:L,l:'L'},{v:K,l:'K'}].map(x=>`<div class="bbc"><div class="bbnum">${x.v}</div><div class="bblbl">${x.l}</div></div>`).join('')}</div>
+    <div class="bbox">${[{v:N,l:'N'},{v:O,l:'O'}].map(x=>`<div class="bbc"><div class="bbnum">${x.v}</div><div class="bblbl">${x.l}</div></div>`).join('')}</div>
+  </div>`;
+
+  return topIn+`<div class="svg-wrap">${s}</div>`+bboxes;
+}
+
+function ic(le,lc,v,sub=''){return`<div class="ic"><div class="ic-l"><span class="l-en">${le}</span><span class="l-cn">${lc}</span></div><div class="ic-v">${v}</div>${sub?`<div class="ic-s">${sub}</div>`:''}</div>`}
+function dcard(n,isDest=false){
+  const pre=isDest?`<div class="dc-t"><span class="l-en">✦ Destined Dream — No.${n}</span><span class="l-cn" style="font-family:'Noto Serif SC'">✦ 命定数字 — ${n}号</span></div>`:`<div class="dc-t"><span class="l-en">Character ${n}</span><span class="l-cn" style="font-family:'Noto Serif SC'">${n}号人</span></div>`;
+  return`<div class="dc">${pre}<div class="dc-en l-en">${CHAR_EN[n]||''}</div><div class="dc-cn l-cn" style="font-family:'Noto Serif SC'">${CHAR_CN[n]||''}</div></div>`;
+}
+function cycRes(n,te,tc){
+  const nx=n===9?1:n+1;
+  return`<div class="cyc-d"><div class="cyc-n">${n}</div><div class="cyc-i"><div class="cyc-il"><span class="l-en">${te}</span><span class="l-cn" style="font-family:'Noto Serif SC'">${tc}</span></div><div class="cyc-iv l-en">${CYC_T_EN[n]}</div><div class="cyc-iv l-cn" style="font-family:'Noto Serif SC'">${CYC_T_CN[n]}</div><div class="nxt"><span class="l-en">Next cycle →</span><span class="l-cn" style="font-family:'Noto Serif SC'">下一周期 →</span><span class="nxt-n">${nx}</span></div></div></div>
+  <div class="dc"><div class="dc-en l-en">${CYC_EN[n]||''}</div><div class="dc-cn l-cn" style="font-family:'Noto Serif SC'">${CYC_CN[n]||''}</div></div><div class="orn">— ✦ —</div>${dcard(n)}`;
+}
+
+function doIT(){
+  const data=compute(document.getElementById('it-d').value,document.getElementById('it-m').value,document.getElementById('it-y').value);
+  if(!data)return;
+  document.getElementById('it-emp').style.display='none';
+  const res=document.getElementById('it-res');res.classList.add('on');
+  const z=ZD[data.zk];
+  const ze=ELS[data.zodiacElem];
+
+  // Info cards
+  document.getElementById('it-cards').innerHTML=
+    ic('Date','日期',`${String(data.d).padStart(2,'0')}/${String(data.m).padStart(2,'0')}/${data.y}`)+
+    ic('Destined Dream','命定数字',data.dest,`No. ${data.dest}`)+
+    ic('Chinese Zodiac','生肖',`${z.e} ${z.en}`,z.cn)+
+    ic('Zodiac Element','生肖五行',`<span style="color:${ze.c}">${ze.en}</span>`,`<span style="font-family:'Noto Serif SC'">${ze.cn}</span>`);
+
+  // Shape
+  document.getElementById('it-shape').innerHTML=buildShape(data);
+
+  // Main Profiling Type (G)
+  document.getElementById('it-profiling').innerHTML=renderProfiling(data);
+
+  // 13 Combinations
+  document.getElementById('it-combos').innerHTML=renderCombos(data);
+
+  // Elements
+  let eh='';Object.entries(data.ec).forEach(([k,v])=>{const el=ELS[k];eh+=`<div class="eb" style="color:${el.c};border-color:${el.b}"><span class="l-en">${el.en} ×${v}</span><span class="l-cn" style="font-family:'Noto Serif SC'">${el.cn} ×${v}</span></div>`});
+  document.getElementById('it-elems').innerHTML=eh;
+
+  // Missing
+  document.getElementById('it-miss').innerHTML=data.miss.length?data.miss.map(n=>`<div class="mn">${n}</div>`).join(''):`<span style="font-size:.82rem;color:var(--gold);font-family:'Cinzel',serif">None 无缺</span>`;
+
+  // Destined descriptions
+  const uniq=[...new Set([data.dest,data.C,data.F,data.G,data.I,data.H].filter(n=>n>=1&&n<=9))];
+  let dh=dcard(data.dest,true);uniq.filter(n=>n!==data.dest).forEach(n=>{dh+=dcard(n)});
+  document.getElementById('it-descs').innerHTML=dh;
+
+  applyLang();
+}
+
+function renderProfiling(data){
+  const G=data.G, ze=ELS[data.zodiacElem];
+  const elemCn={METAL:'金',WATER:'水',WOOD:'木',FIRE:'火',EARTH:'土'};
+  return `<div class="profiling-card">
+    <div class="prof-top">
+      <div class="prof-num">${G}</div>
+      <div class="prof-elem" style="color:${ze.c}">${elemCn[data.zodiacElem]}</div>
+    </div>
+    <div class="prof-elem-row">
+      <span class="eb" style="color:${ze.c};border-color:${ze.b};font-size:.85rem;padding:.4rem 1rem">
+        <span class="l-en">${ze.en}</span><span class="l-cn" style="font-family:'Noto Serif SC'">${ze.cn}</span>
+      </span>
+      <span style="font-family:'Cinzel',serif;font-size:.68rem;color:var(--muted);letter-spacing:.15em;margin-left:.75rem">
+        <span class="l-en">Zodiac Year Element</span><span class="l-cn" style="font-family:'Noto Serif SC'">生肖年五行</span>
+      </span>
+    </div>
+    <div class="dc" style="margin-top:1rem">
+      <div class="dc-t"><span class="l-en">Main Profiling Type — No.${G}</span><span class="l-cn" style="font-family:'Noto Serif SC'">主性格类型 — ${G}号</span></div>
+      <div class="dc-en l-en">${CHAR_EN[G]||''}</div>
+      <div class="dc-cn l-cn" style="font-family:'Noto Serif SC'">${CHAR_CN[G]||''}</div>
+    </div>
+  </div>`;
+}
+
+function renderCombos(data){
+  const rows = data.combos.map((c,i)=>{
+    const numStr = c.vals.join('');
+    return `<tr>
+      <td class="combo-idx">${i+1}</td>
+      <td class="combo-name"><span class="l-en">${c.name}</span><span class="l-cn" style="font-family:'Noto Serif SC'">${c.nameCn}</span></td>
+      <td class="combo-code">${c.code}</td>
+      <td class="combo-nums">${numStr}</td>
+    </tr>`;
+  }).join('');
+  return `<div class="combo-wrap">
+    <table class="combo-table">
+      <thead><tr>
+        <th>#</th>
+        <th><span class="l-en">Category</span><span class="l-cn" style="font-family:'Noto Serif SC'">类别</span></th>
+        <th><span class="l-en">Code</span><span class="l-cn">代码</span></th>
+        <th><span class="l-en">Numbers</span><span class="l-cn">数字</span></th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+  </div>`;
+}
+
+function doYCIT(){
+  const data=compute(document.getElementById('ycit-d').value,document.getElementById('ycit-m').value,document.getElementById('ycit-y').value);
+  const ty=parseInt(document.getElementById('ycit-ty').value);if(!data)return;
+  const cn=rd(data.C+rd(ty));
+  document.getElementById('ycit-emp').style.display='none';
+  const res=document.getElementById('ycit-res');res.classList.add('on');
+  res.innerHTML=`<div class="slbl"><span class="l-en">Year ${ty} · IT Method</span><span class="l-cn" style="font-family:'Noto Serif SC'">${ty}年流年 · 七魄法</span></div>${cycRes(cn,`Year ${ty} Cycle (IT Method)`,`${ty}年流年（七魄法）`)}`;
+  applyLang();
+}
+function doYC(){
+  const data=compute(document.getElementById('yc-d').value,document.getElementById('yc-m').value,document.getElementById('yc-y').value);
+  const ty=parseInt(document.getElementById('yc-ty').value);if(!data)return;
+  const cn=rd(data.dest+rd(ty));
+  document.getElementById('yc-emp').style.display='none';
+  const res=document.getElementById('yc-res');res.classList.add('on');
+  res.innerHTML=`<div class="slbl"><span class="l-en">Year ${ty} Personal Cycle</span><span class="l-cn" style="font-family:'Noto Serif SC'">${ty}年个人流年</span></div>${cycRes(cn,`Year ${ty} Personal Year Cycle`,`${ty}年个人流年周期`)}`;
+  applyLang();
+}
+function doMC(){
+  const data=compute(document.getElementById('mc-d').value,document.getElementById('mc-m').value,document.getElementById('mc-y').value);
+  const cy=parseInt(document.getElementById('mc-cy').value),tm=parseInt(document.getElementById('mc-tm').value);if(!data)return;
+  const yc=rd(data.dest+rd(cy)),cn=rd(yc+tm);
+  const ME=['','January','February','March','April','May','June','July','August','September','October','November','December'];
+  const MC=['','一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+  document.getElementById('mc-emp').style.display='none';
+  const res=document.getElementById('mc-res');res.classList.add('on');
+  res.innerHTML=`<div class="slbl"><span class="l-en">${ME[tm]} ${cy} · Month Cycle</span><span class="l-cn" style="font-family:'Noto Serif SC'">${cy}年${MC[tm]}月份周期</span></div>${cycRes(cn,`${ME[tm]} ${cy} Month Cycle`,`${cy}年${MC[tm]}月周期`)}`;
+  applyLang();
+}
+function doDC(){
+  const data=compute(document.getElementById('dc-d').value,document.getElementById('dc-m').value,document.getElementById('dc-y').value);
+  const td=document.getElementById('dc-td').value;if(!data||!td)return;
+  const[ty,tm,tdd]=td.split('-').map(Number);
+  const yc=rd(data.dest+rd(ty)),mc=rd(yc+tm),dn=rd(mc+tdd);
+  const ds=`${String(tdd).padStart(2,'0')}/${String(tm).padStart(2,'0')}/${ty}`;
+  document.getElementById('dc-emp').style.display='none';
+  const res=document.getElementById('dc-res');res.classList.add('on');
+  res.innerHTML=`<div class="slbl"><span class="l-en">${ds} · Day Cycle</span><span class="l-cn" style="font-family:'Noto Serif SC'">${ty}年${tm}月${tdd}日</span></div>${cycRes(dn,`${ds} Day Cycle`,`${ty}年${tm}月${tdd}日周期`)}`;
+  applyLang();
+}
+
+let lang='en';
+function setLang(l){lang=l;document.getElementById('btn-en').classList.toggle('on',l==='en');document.getElementById('btn-cn').classList.toggle('on',l==='cn');applyLang()}
+function applyLang(){document.body.classList.toggle('len',lang==='en');document.body.classList.toggle('lcn',lang==='cn')}
+function toggleTheme(){const d=document.body.dataset.theme==='dark';document.body.dataset.theme=d?'light':'dark';document.getElementById('thm').textContent=d?'🌙':'☀️';const it=document.getElementById('it-res');if(it.classList.contains('on')){const data=compute(document.getElementById('it-d').value,document.getElementById('it-m').value,document.getElementById('it-y').value);if(data)document.getElementById('it-shape').innerHTML=buildShape(data)}}
+function showTab(n){document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('on'));document.querySelectorAll('.tbtn').forEach(b=>b.classList.remove('on'));document.getElementById('panel-'+n).classList.add('on');document.getElementById('tab-'+n).classList.add('on')}
+window.addEventListener('load',()=>{applyLang();doIT()});
+</script>
+</body>
+</html>
