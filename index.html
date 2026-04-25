@@ -518,10 +518,10 @@ function compute(day, mon, yr) {
     if (n >= 1 && n <= 9) { var e = NE[n]; ec[e] = (ec[e] || 0) + 1; }
   }
 
-  // Missing numbers (from the 4 top input digits only)
-  var topSet = {};
-  [tA, tB, tD, tE].forEach(function(x){ if (x > 0) topSet[x] = true; });
-  var miss = [1,2,3,4,5,6,7,8,9].filter(function(x){ return !topSet[x]; });
+  // Missing numbers from A,B,D,E (top 4) + C,F (first computed level)
+  var missSet = {};
+  [tA, tB, tD, tE, vC, vF].forEach(function(x){ if (x > 0) missSet[x] = true; });
+  var miss = [1,2,3,4,5,6,7,8,9].filter(function(x){ return !missSet[x]; });
 
   return {
     day:day, mon:mon, yr:yr, cen:cen, yr2:yr2,
