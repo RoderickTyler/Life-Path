@@ -170,6 +170,7 @@ body.len .l-cn{display:none!important}
 
 <nav class="tab-bar">
   <button class="tbtn on" id="tab-it" onclick="showTab('it')">Inverted Triangle<span class="tcn">七魄逆三角</span></button>
+  <button class="tbtn" id="tab-cb" onclick="showTab('cb')">Partners Combination<span class="tcn">配对组合</span></button>
   <button class="tbtn" id="tab-ycit" onclick="showTab('ycit')">Year Cycle (IT)<span class="tcn">流年·七魄</span></button>
   <button class="tbtn" id="tab-yc" onclick="showTab('yc')">Year Cycle<span class="tcn">流年周期</span></button>
   <button class="tbtn" id="tab-mc" onclick="showTab('mc')">Month Cycle<span class="tcn">月份周期</span></button>
@@ -182,7 +183,7 @@ body.len .l-cn{display:none!important}
 <div class="tab-panel on" id="panel-it">
   <div class="ipanel">
     <div class="ptitle l-en">Birth Date · Life Path Calculator</div>
-    <div class="ptitle l-cn" style="font-family:'Noto Serif SC'">出生日期 · 七魄计算</div>
+    <div class="ptitle l-cn" style="font-family:Noto Serif SC">出生日期 · 七魄计算</div>
     <div class="irow">
       <div class="ig"><label><span class="l-en">Day (DD)</span><span class="l-cn">日</span></label><input type="number" id="it-d" min="1" max="31" value=""></div>
       <div class="ig"><label><span class="l-en">Month (MM)</span><span class="l-cn">月</span></label><input type="number" id="it-m" min="1" max="12" value=""></div>
@@ -190,7 +191,7 @@ body.len .l-cn{display:none!important}
       <button class="cbtn" onclick="doIT()"><span class="l-en">Calculate</span><span class="l-cn">计算</span></button>
     </div>
   </div>
-  <div class="emp" id="it-emp"><div class="ei">🔯</div><p class="l-en">Enter your birth date above</p><p class="l-cn" style="font-family:'Noto Serif SC'">输入出生日期以查询七魄</p></div>
+  <div class="emp" id="it-emp"><div class="ei">🔯</div><p class="l-en">Enter your birth date above</p><p class="l-cn" style="font-family:Noto Serif SC">输入出生日期以查询七魄</p></div>
   <div class="res" id="it-res">
     <div class="igrid" id="it-cards"></div>
     <div class="slbl"><span class="l-en">Life Path · Shape</span><span class="l-cn">七魄图形</span></div>
@@ -213,7 +214,7 @@ body.len .l-cn{display:none!important}
 <div class="tab-panel" id="panel-ycit">
   <div class="ipanel">
     <div class="ptitle l-en">Year Cycle · IT Method</div>
-    <div class="ptitle l-cn" style="font-family:'Noto Serif SC'">流年周期 · 七魄法</div>
+    <div class="ptitle l-cn" style="font-family:Noto Serif SC">流年周期 · 七魄法</div>
     <div class="irow">
       <div class="ig"><label><span class="l-en">Day</span><span class="l-cn">日</span></label><input type="number" id="ycit-d" min="1" max="31" value=""></div>
       <div class="ig"><label><span class="l-en">Month</span><span class="l-cn">月</span></label><input type="number" id="ycit-m" min="1" max="12" value=""></div>
@@ -222,7 +223,7 @@ body.len .l-cn{display:none!important}
       <button class="cbtn" onclick="doYCIT()"><span class="l-en">Calculate</span><span class="l-cn">计算</span></button>
     </div>
   </div>
-  <div class="emp" id="ycit-emp"><div class="ei">📅</div><p class="l-en">Enter birth date and year to read</p><p class="l-cn" style="font-family:'Noto Serif SC'">输入出生日期和查询年份</p></div>
+  <div class="emp" id="ycit-emp"><div class="ei">📅</div><p class="l-en">Enter birth date and year to read</p><p class="l-cn" style="font-family:Noto Serif SC">输入出生日期和查询年份</p></div>
   <div class="res" id="ycit-res"></div>
 </div>
 
@@ -230,7 +231,7 @@ body.len .l-cn{display:none!important}
 <div class="tab-panel" id="panel-yc">
   <div class="ipanel">
     <div class="ptitle l-en">Year Cycle Reading</div>
-    <div class="ptitle l-cn" style="font-family:'Noto Serif SC'">流年周期解读</div>
+    <div class="ptitle l-cn" style="font-family:Noto Serif SC">流年周期解读</div>
     <div class="irow">
       <div class="ig"><label><span class="l-en">Day</span><span class="l-cn">日</span></label><input type="number" id="yc-d" min="1" max="31" value=""></div>
       <div class="ig"><label><span class="l-en">Month</span><span class="l-cn">月</span></label><input type="number" id="yc-m" min="1" max="12" value=""></div>
@@ -239,7 +240,7 @@ body.len .l-cn{display:none!important}
       <button class="cbtn" onclick="doYC()"><span class="l-en">Calculate</span><span class="l-cn">计算</span></button>
     </div>
   </div>
-  <div class="emp" id="yc-emp"><div class="ei">🌀</div><p class="l-en">Enter birth date and year to read</p><p class="l-cn" style="font-family:'Noto Serif SC'">输入出生日期及查询年份</p></div>
+  <div class="emp" id="yc-emp"><div class="ei">🌀</div><p class="l-en">Enter birth date and year to read</p><p class="l-cn" style="font-family:Noto Serif SC">输入出生日期及查询年份</p></div>
   <div class="res" id="yc-res"></div>
 </div>
 
@@ -247,7 +248,7 @@ body.len .l-cn{display:none!important}
 <div class="tab-panel" id="panel-mc">
   <div class="ipanel">
     <div class="ptitle l-en">Month Cycle Reading</div>
-    <div class="ptitle l-cn" style="font-family:'Noto Serif SC'">月份周期解读</div>
+    <div class="ptitle l-cn" style="font-family:Noto Serif SC">月份周期解读</div>
     <div class="irow">
       <div class="ig"><label><span class="l-en">Birth Day</span><span class="l-cn">出生日</span></label><input type="number" id="mc-d" min="1" max="31" value=""></div>
       <div class="ig"><label><span class="l-en">Birth Month</span><span class="l-cn">出生月</span></label><input type="number" id="mc-m" min="1" max="12" value=""></div>
@@ -264,7 +265,7 @@ body.len .l-cn{display:none!important}
       <button class="cbtn" onclick="doMC()"><span class="l-en">Calculate</span><span class="l-cn">计算</span></button>
     </div>
   </div>
-  <div class="emp" id="mc-emp"><div class="ei">🌙</div><p class="l-en">Enter birth date, year and month to read</p><p class="l-cn" style="font-family:'Noto Serif SC'">输入出生日期及查询年月</p></div>
+  <div class="emp" id="mc-emp"><div class="ei">🌙</div><p class="l-en">Enter birth date, year and month to read</p><p class="l-cn" style="font-family:Noto Serif SC">输入出生日期及查询年月</p></div>
   <div class="res" id="mc-res"></div>
 </div>
 
@@ -272,7 +273,7 @@ body.len .l-cn{display:none!important}
 <div class="tab-panel" id="panel-dc">
   <div class="ipanel">
     <div class="ptitle l-en">Day Cycle Reading</div>
-    <div class="ptitle l-cn" style="font-family:'Noto Serif SC'">日期周期解读</div>
+    <div class="ptitle l-cn" style="font-family:Noto Serif SC">日期周期解读</div>
     <div class="irow">
       <div class="ig"><label><span class="l-en">Birth Day</span><span class="l-cn">出生日</span></label><input type="number" id="dc-d" min="1" max="31" value=""></div>
       <div class="ig"><label><span class="l-en">Birth Month</span><span class="l-cn">出生月</span></label><input type="number" id="dc-m" min="1" max="12" value=""></div>
@@ -281,9 +282,56 @@ body.len .l-cn{display:none!important}
       <button class="cbtn" onclick="doDC()"><span class="l-en">Calculate</span><span class="l-cn">计算</span></button>
     </div>
   </div>
-  <div class="emp" id="dc-emp"><div class="ei">☀️</div><p class="l-en">Enter birth date and the day to read</p><p class="l-cn" style="font-family:'Noto Serif SC'">输入出生日期及查询日期</p></div>
+  <div class="emp" id="dc-emp"><div class="ei">☀️</div><p class="l-en">Enter birth date and the day to read</p><p class="l-cn" style="font-family:Noto Serif SC">输入出生日期及查询日期</p></div>
   <div class="res" id="dc-res"></div>
 </div>
+
+<!-- ═══ COMBINATION TAB ═══ -->
+<div class="tab-panel" id="panel-cb">
+  <div class="ipanel">
+    <div class="ptitle l-en">Partners Combination Reading</div>
+    <div class="ptitle l-cn" style="font-family:Noto Serif SC">配对组合 · 伴侣 + 自己</div>
+    <div style="margin-bottom:1rem">
+      <div style="font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.15em;color:var(--gold);margin-bottom:.6rem;text-transform:uppercase">
+        <span class="l-en">Partner</span><span class="l-cn">伴侣</span>
+      </div>
+      <div class="irow">
+        <div class="ig"><label><span class="l-en">Day</span><span class="l-cn">日</span></label><input type="number" id="cb-pd" min="1" max="31" placeholder="DD"></div>
+        <div class="ig"><label><span class="l-en">Month</span><span class="l-cn">月</span></label><input type="number" id="cb-pm" min="1" max="12" placeholder="MM"></div>
+        <div class="ig"><label><span class="l-en">Year</span><span class="l-cn">年</span></label><input type="number" id="cb-py" min="1900" max="2099" placeholder="YYYY"></div>
+      </div>
+    </div>
+    <div style="margin-bottom:1rem">
+      <div style="font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.15em;color:var(--gold);margin-bottom:.6rem;text-transform:uppercase">
+        <span class="l-en">Self</span><span class="l-cn">自己</span>
+      </div>
+      <div class="irow">
+        <div class="ig"><label><span class="l-en">Day</span><span class="l-cn">日</span></label><input type="number" id="cb-sd" min="1" max="31" placeholder="DD"></div>
+        <div class="ig"><label><span class="l-en">Month</span><span class="l-cn">月</span></label><input type="number" id="cb-sm" min="1" max="12" placeholder="MM"></div>
+        <div class="ig"><label><span class="l-en">Year</span><span class="l-cn">年</span></label><input type="number" id="cb-sy" min="1900" max="2099" placeholder="YYYY"></div>
+        <button class="cbtn" onclick="doCombo()"><span class="l-en">Calculate</span><span class="l-cn">计算</span></button>
+      </div>
+    </div>
+  </div>
+  <div class="emp" id="cb-emp"><div class="ei">💑</div><p class="l-en">Enter both birth dates to reveal your combination</p><p class="l-cn" style="font-family:Noto Serif SC">输入双方出生日期以查询配对数字</p></div>
+  <div class="res" id="cb-res">
+    <div class="igrid" id="cb-cards"></div>
+    <div class="slbl"><span class="l-en">Combination · Shape</span><span class="l-cn">配对图形</span></div>
+    <div class="shape-wrap"><div class="hourglass" id="cb-shape"></div></div>
+    <div class="slbl"><span class="l-en">Main Profiling Type (G) · Element</span><span class="l-cn">主性格 (G) · 五行</span></div>
+    <div id="cb-prof"></div>
+    <div class="slbl"><span class="l-en">13 Number Combinations</span><span class="l-cn">13个数字组合</span></div>
+    <div id="cb-combos"></div>
+    <div class="slbl"><span class="l-en">Five Elements Count</span><span class="l-cn">五行统计</span></div>
+    <div class="er" id="cb-elems"></div>
+    <div class="slbl"><span class="l-en">Missing Numbers</span><span class="l-cn">缺少的数字</span></div>
+    <div class="mr" id="cb-miss"></div>
+    <div class="orn">— ✦ —</div>
+    <div class="slbl"><span class="l-en">Main Profile · Character Reading</span><span class="l-cn">主性格 · 性格解读</span></div>
+    <div id="cb-descs"></div>
+  </div>
+</div>
+
 
 </main>
 
@@ -494,8 +542,8 @@ function compute(day, mon, yr) {
   var vO = rd(tE + vF);
   var vP = rd(vN + vO);     // P = N + O
 
-  // Destined Dream
-  var dest = rd(day + mon + yr2);
+  // Destined Dream = rd(A + G + E)  [formula: B5+D9+G5 from spreadsheet]
+  var dest = rd(tA + vG + tE);
 
   // Zodiac animal
   var zodKey = ZBY12[yr % 12];
@@ -1069,6 +1117,190 @@ function showTab(n) {
   document.querySelectorAll('.tbtn').forEach(function(b){ b.classList.remove('on'); });
   document.getElementById('panel-'+n).classList.add('on');
   document.getElementById('tab-'+n).classList.add('on');
+}
+
+
+// ══════════════════════════════════════════
+// COMBINATION CALCULATOR
+// ══════════════════════════════════════════
+function computeCombo(pd, pm, py, sd, sm, sy) {
+  pd=parseInt(pd); pm=parseInt(pm); py=parseInt(py);
+  sd=parseInt(sd); sm=parseInt(sm); sy=parseInt(sy);
+  if (!pd||!pm||!py||!sd||!sm||!sy) return null;
+
+  var pcen=Math.floor(py/100), pyr2=py%100;
+  var scen=Math.floor(sy/100), syr2=sy%100;
+
+  // Reduce each person's inputs
+  var pA=rd(pd), pB=rd(pm), pD=rd(pcen), pE=rd(pyr2);
+  var sA=rd(sd), sB=rd(sm), sD=rd(scen), sE=rd(syr2);
+
+  // Combine: add partner + self, reduce
+  var tA=rd(pA+sA);  // Combined Day
+  var tB=rd(pB+sB);  // Combined Month
+  var tD=rd(pD+sD);  // Combined Century
+  var tE=rd(pE+sE);  // Combined Year2
+
+  // Same formulas as inverted triangle from here
+  var vC=rd(tA+tB);
+  var vF=rd(tD+tE);
+  var vG=rd(vC+vF);
+
+  // Destined Dream = rd(A+G+E)  — must come after vG is computed
+  var dest=rd(tA+vG+tE);
+  var vI=rd(vF+vG);
+  var vH=rd(vC+vG);
+  var vJ=rd(vI+vH);
+  var vK=rd(tA+vC);
+  var vL=rd(tB+vC);
+  var vM=rd(vK+vL);
+  var vN=rd(tD+vF);
+  var vO=rd(tE+vF);
+  var vP=rd(vN+vO);
+
+  var numElem=NE[vG];
+
+  // 13 Combinations (same as inverted triangle)
+  var combos=[
+    {name:"Father's Gene / Career",    nameCn:"父亲基因 / 事业",       code:"ABC", v:[tA,tB,vC]},
+    {name:"Mother's Gene / Marriage",  nameCn:"母亲基因 / 婚姻",       code:"DEF", v:[tD,tE,vF]},
+    {name:"Main Character / Self",     nameCn:"主性格 / 自身 (G)",     code:"CFG", v:[vC,vF,vG]},
+    {name:"Life's Journey 1",          nameCn:"人生旅途 1",            code:"CGH", v:[vC,vG,vH]},
+    {name:"Life's Journey 2",          nameCn:"人生旅途 2",            code:"FGI", v:[vF,vG,vI]},
+    {name:"Children / Subordinate",    nameCn:"子女 / 下属",           code:"IHJ", v:[vI,vH,vJ]},
+    {name:"Career Journey 1",          nameCn:"事业旅途 1",            code:"ACK", v:[tA,vC,vK]},
+    {name:"Career Journey 2",          nameCn:"事业旅途 2",            code:"BCL", v:[tB,vC,vL]},
+    {name:"Current Friends",           nameCn:"当前朋友",              code:"KLM", v:[vK,vL,vM]},
+    {name:"Marriage Journey 1",        nameCn:"婚姻旅途 1",            code:"DFN", v:[tD,vF,vN]},
+    {name:"Marriage Journey 2",        nameCn:"婚姻旅途 2",            code:"EFO", v:[tE,vF,vO]},
+    {name:"Future In-law's Health/Wealth", nameCn:"未来姻亲健康/财富", code:"NOP", v:[vN,vO,vP]},
+    {name:"Subconscious / Hidden",     nameCn:"潜意识 / 隐藏潜力",     code:"CFG+CFG", v:[rd(vC+vC),rd(vF+vF),rd(vG+vG)]}
+  ];
+
+  // Element count from all 16 numbers
+  var allD=[tA,tB,tD,tE, vC,vF,vG, vI,vH, vJ, vK,vL,vM, vN,vO,vP];
+  var ec={};
+  for (var i=0;i<allD.length;i++){
+    var n=allD[i];
+    if(n>=1&&n<=9){var e=NE[n];ec[e]=(ec[e]||0)+1;}
+  }
+
+  // Missing from A,B,D,E,C,F
+  var missSet={};
+  [tA,tB,tD,tE,vC,vF].forEach(function(x){if(x>0)missSet[x]=true;});
+  var miss=[1,2,3,4,5,6,7,8,9].filter(function(x){return !missSet[x];});
+
+  return {
+    pd:pd,pm:pm,py:py,sd:sd,sm:sm,sy:sy,
+    pcen:pcen,pyr2:pyr2,scen:scen,syr2:syr2,
+    tA:tA,tB:tB,tD:tD,tE:tE,
+    vC:vC,vF:vF,vG:vG,vI:vI,vH:vH,vJ:vJ,
+    vK:vK,vL:vL,vM:vM,vN:vN,vO:vO,vP:vP,
+    dest:dest,numElem:numElem,combos:combos,ec:ec,miss:miss
+  };
+}
+
+function doCombo() {
+  var data=computeCombo(
+    document.getElementById('cb-pd').value, document.getElementById('cb-pm').value, document.getElementById('cb-py').value,
+    document.getElementById('cb-sd').value, document.getElementById('cb-sm').value, document.getElementById('cb-sy').value
+  );
+  if (!data) return;
+
+  document.getElementById('cb-emp').style.display='none';
+  var res=document.getElementById('cb-res');
+  res.classList.add('on');
+
+  // Info cards — no zodiac (two different years), show destined dream + G
+  var pe=ELS[data.numElem];
+  document.getElementById('cb-cards').innerHTML=
+    ic('Partner','伴侣', String(data.pd).padStart(2,'0')+'/'+String(data.pm).padStart(2,'0')+'/'+data.py) +
+    ic('Self','自己', String(data.sd).padStart(2,'0')+'/'+String(data.sm).padStart(2,'0')+'/'+data.sy) +
+    ic('Destined Dream','命定数字', data.dest, 'No. '+data.dest) +
+    ic('Profile Type','主性格类型', data.vG, 'No. '+data.vG);
+
+  // Shape (reuse buildShape — pass data with same field names)
+  var shapeData={
+    day:data.pd, mon:data.pm, cen:data.pcen, yr2:data.pyr2,
+    tA:data.tA, tB:data.tB, tD:data.tD, tE:data.tE,
+    vC:data.vC, vF:data.vF, vG:data.vG, vI:data.vI, vH:data.vH, vJ:data.vJ,
+    vK:data.vK, vL:data.vL, vM:data.vM, vN:data.vN, vO:data.vO, vP:data.vP,
+    dest:data.dest
+  };
+  // Override top-inputs to show both dates
+  var shape=buildShape(shapeData);
+  // Replace top-inputs section with both dates display
+  var topOverride='<div class="top-inputs" style="flex-wrap:wrap;gap:.5rem">'+
+    '<div style="display:flex;flex-direction:column;align-items:center;gap:.2rem">'+
+      '<div style="font-family:Cinzel,serif;font-size:.55rem;letter-spacing:.15em;color:var(--muted);text-transform:uppercase">Partner</div>'+
+      '<div class="ibox">'+String(data.pd).padStart(2,'0')+'/'+String(data.pm).padStart(2,'0')+'/'+data.py+'</div>'+
+    '</div>'+
+    '<div class="dest-wrap">'+
+      '<div class="dest-circ">'+data.dest+'</div>'+
+      '<div class="dest-lbl l-en">Destined Dream</div>'+
+      '<div class="dest-lbl l-cn">命定数字</div>'+
+    '</div>'+
+    '<div style="display:flex;flex-direction:column;align-items:center;gap:.2rem">'+
+      '<div style="font-family:Cinzel,serif;font-size:.55rem;letter-spacing:.15em;color:var(--muted);text-transform:uppercase">Self</div>'+
+      '<div class="ibox">'+String(data.sd).padStart(2,'0')+'/'+String(data.sm).padStart(2,'0')+'/'+data.sy+'</div>'+
+    '</div>'+
+    '</div>';
+  // Find and replace the top-inputs div in the built shape
+  var tiStart=shape.indexOf('<div class="top-inputs"');
+  var tiEnd=shape.indexOf('</div>',tiStart)+6;
+  // Account for nested divs
+  var depth=0, pos=tiStart, found=-1;
+  for(var ci=tiStart;ci<shape.length;ci++){
+    if(shape[ci]==='<'&&shape.slice(ci,ci+4)==='<div') depth++;
+    if(shape[ci]==='<'&&shape.slice(ci,ci+6)==='</div>') {depth--;if(depth===0){found=ci+6;break;}}
+  }
+  shape = found>0 ? topOverride+shape.slice(found) : topOverride+shape.slice(tiEnd);
+  document.getElementById('cb-shape').innerHTML=shape;
+
+  // Profile card (no zodiac year)
+  document.getElementById('cb-prof').innerHTML=profCardNoZodiac(data);
+
+  // 13 Combos
+  document.getElementById('cb-combos').innerHTML=comboTable(data);
+
+  // Elements
+  var eh='';
+  var ekeys=['METAL','WATER','WOOD','FIRE','EARTH'];
+  for(var ei=0;ei<ekeys.length;ei++){
+    var k=ekeys[ei];
+    if(data.ec[k]){var el=ELS[k];eh+='<div class="eb" style="color:'+el.c+';border-color:'+el.b+'"><span class="l-en">'+el.en+' ×'+data.ec[k]+'</span><span class="l-cn" style="font-family:serif">'+el.cn+' ×'+data.ec[k]+'</span></div>';}
+  }
+  document.getElementById('cb-elems').innerHTML=eh||'-';
+
+  // Missing
+  document.getElementById('cb-miss').innerHTML=data.miss.length
+    ?data.miss.map(function(n){return '<div class="mn">'+n+'</div>';}).join('')
+    :'<span style="font-size:.82rem;color:var(--gold)">None 无缺</span>';
+
+  // Character (G only)
+  document.getElementById('cb-descs').innerHTML=descCard(data.vG,true);
+
+  applyLang();
+}
+
+function profCardNoZodiac(data) {
+  var G=data.vG;
+  var pe=ELS[data.numElem];
+  var ch=CHARS[G]||['',''];
+  return '<div class="prof-card">'+
+    '<div class="prof-top">'+
+      '<div class="prof-num">'+G+'</div>'+
+      '<div class="prof-elem-char" style="color:'+pe.c+'">'+pe.char+'</div>'+
+      '<div class="prof-meta">'+
+        '<div class="prof-badge" style="color:'+pe.c+';border-color:'+pe.b+'">'+
+          '<span class="l-en">'+pe.en+' · Profile Element</span>'+
+          '<span class="l-cn" style="font-family:Noto Serif SC">'+pe.cn+' · 命理五行</span>'+
+        '</div>'+
+      '</div>'+
+    '</div>'+
+    '<div class="dc-en l-en">'+ch[0]+'</div>'+
+    '<div class="dc-cn l-cn" style="font-family:Noto Serif SC">'+ch[1]+'</div>'+
+    '</div>';
 }
 
 window.addEventListener('load', function() {
